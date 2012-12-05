@@ -1,10 +1,10 @@
 
-%global git_revno 197
+%global git_revno 205
 
 Name:           openstack-packstack
-Version:        2012.2.1
+Version:        2012.2.2
 #Release:       1%{?dist}
-Release:        1dev%{git_revno}%{?dist}
+Release:        0.1.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -74,6 +74,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Wed Dec 05 2012 Derek Higgins <derekh@redhat.com> - 2012.2.2-0.1.dev205
+- Fixing pre release versioning
+- updated to version 2012.2.2dev205
 
 * Fri Nov 30 2012 Derek Higgins <derekh@redhat.com> - 2012.2.1-1dev197
 - cleaning up spec file
