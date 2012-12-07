@@ -1,10 +1,10 @@
 
-%global git_revno 205
+%global git_revno 211
 
 Name:           openstack-packstack
 Version:        2012.2.2
 #Release:       1%{?dist}
-Release:        0.1.dev%{git_revno}%{?dist}
+Release:        0.2.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -37,7 +37,8 @@ apply puppet labs modules (https://github.com/puppetlabs/)
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} \;
-find packstack/puppet/modules \( -name "*.py" -o -name "*.rb" -o -name "*.sh" -o -name "*.pl" \) -exec sed -i '/^#!/{d;q}' {} \; -exec chmod -x {} \;
+find packstack/puppet/modules \( -name "*.py" -o -name "*.rb" -o -name "*.pl" \) -exec sed -i '/^#!/{d;q}' {} \; -exec chmod -x {} \;
+find packstack/puppet/modules \( -name "*.sh" \) -exec sed -i 's/^#!.*/#!\/bin\/bash/g' {} \; -exec chmod +x {} \;
 find packstack/puppet/modules -name site.pp -size 0 -exec rm {} \;
 
 # Moving this data directory out temporarily as it causes setup.py to throw errors
@@ -74,6 +75,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Fri Dec 07 2012 Derek Higgins <derekh@redhat.com> - 2012.2.2-0.2.dev211
+- Fixed packaging, shebang in .sh files was being removed
+- updated to version 2012.2.2dev211
+
 * Wed Dec 05 2012 Derek Higgins <derekh@redhat.com> - 2012.2.2-0.1.dev205
 - Fixing pre release versioning
 - updated to version 2012.2.2dev205
