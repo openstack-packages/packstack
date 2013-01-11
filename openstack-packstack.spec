@@ -1,17 +1,17 @@
 
-%global git_revno 211
+%global git_revno 281
 
 Name:           openstack-packstack
 Version:        2012.2.2
 #Release:       1%{?dist}
-Release:        0.2.dev%{git_revno}%{?dist}
+Release:        0.3.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0
 URL:            https://github.com/fedora-openstack/packstack
-#Source0:        https://github.com/downloads/fedora-openstack/packstack/packstack-%{version}.tar.gz
-Source0:        https://github.com/downloads/fedora-openstack/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+#Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}.tar.gz
+Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
 BuildArch:      noarch
 
@@ -75,6 +75,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Fri Jan 11 2013 Derek Higgins <derekh@redhat.com> - 2012.2.2-0.2.dev281
+- updated to version 2012.2.2dev281
+
 * Fri Dec 07 2012 Derek Higgins <derekh@redhat.com> - 2012.2.2-0.2.dev211
 - Fixed packaging, shebang in .sh files was being removed
 - updated to version 2012.2.2dev211
