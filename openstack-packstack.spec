@@ -1,10 +1,10 @@
 
-%global git_revno 315
+%global git_revno 318
 
 Name:           openstack-packstack
 Version:        2012.2.2
 #Release:       1%{?dist}
-Release:        0.4.dev%{git_revno}%{?dist}
+Release:        0.5.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -76,6 +76,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Mon Jan 21 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-0.5.dev318
+- Updated to version 2012.2.2dev318
+
 * Fri Jan 18 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-0.4.dev315
 - Added openstack-utils to Requires
 - Updated to version 2012.2.2dev315
