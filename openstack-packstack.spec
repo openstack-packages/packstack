@@ -1,17 +1,17 @@
 
-%global git_revno 346
+%global git_revno 406
 
 Name:           openstack-packstack
 Version:        2012.2.2
 #Release:       1%{?dist}
-Release:        0.7.dev%{git_revno}%{?dist}
+Release:        0.8.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0
 URL:            https://github.com/fedora-openstack/packstack
 #Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}.tar.gz
-Source0:        http://paramite.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
 BuildArch:      noarch
 
@@ -76,6 +76,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Wed Feb 13 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-0.8.dev406
+- Updated to version 2012.2.2dev406
+
 * Tue Jan 29 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-0.7.dev346
 - Updated to version 2012.2.2dev346
 
