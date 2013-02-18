@@ -1,10 +1,10 @@
 
-%global git_revno 406
+%global git_revno 408
 
 Name:           openstack-packstack
 Version:        2012.2.2
 #Release:       1%{?dist}
-Release:        0.8.dev%{git_revno}%{?dist}
+Release:        1.0.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -41,6 +41,7 @@ find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name 
 find packstack/puppet/modules \( -name "*.py" -o -name "*.rb" -o -name "*.pl" \) -exec sed -i '/^#!/{d;q}' {} \; -exec chmod -x {} \;
 find packstack/puppet/modules \( -name "*.sh" \) -exec sed -i 's/^#!.*/#!\/bin\/bash/g' {} \; -exec chmod +x {} \;
 find packstack/puppet/modules -name site.pp -size 0 -exec rm {} \;
+find packstack/puppet/modules \( -name spec -o -name ext \)  | xargs  rm -rf
 
 # Moving this data directory out temporarily as it causes setup.py to throw errors
 rm -rf %{_builddir}/puppet
@@ -76,6 +77,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Mon Feb 18 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-1.0.dev408
+- Updated to version 2012.2.2dev408
+
 * Wed Feb 13 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-0.8.dev406
 - Updated to version 2012.2.2dev406
 
@@ -109,4 +113,3 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 * Wed Nov 28 2012 Derek Higgins <derekh@redhat.com> - 2012.2.1-1dev186
 - example packaging for Fedora / Redhat
-
