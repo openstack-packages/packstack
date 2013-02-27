@@ -1,10 +1,10 @@
 
-%global git_revno 408
+%global git_revno 454
 
 Name:           openstack-packstack
-Version:        2012.2.2
+Version:        2012.2.3
 #Release:       1%{?dist}
-Release:        1.0.dev%{git_revno}%{?dist}
+Release:        0.1.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -77,6 +77,14 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{_mandir}/man1/packstack.1.gz
 
 %changelog
+* Wed Feb 27 2013 Martin Magr <mmagr@redhat.com> - 2012.2.3-0.1.dev454
+- Updated to version 2012.2.3dev454
+- Fixes: rhbz#865347, rhbz#888725, rhbz#892247, rhbz#893107, rhbz#894733,
+         rhbz#896618, rhbz#903545, rhbz#903813, rhbz#904670, rhbz#905081,
+         rhbz#905368, rhbz#908695, rhbz#908771, rhbz#908846, rhbz#908900,
+         rhbz#910089, rhbz#910210, rhbz#911626, rhbz#912006, rhbz#912702,
+         rhbz#912745, rhbz#912768, rhbz#915382
+
 * Mon Feb 18 2013 Martin Magr <mmagr@redhat.com> - 2012.2.2-1.0.dev408
 - Updated to version 2012.2.2dev408
 
