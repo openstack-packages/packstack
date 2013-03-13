@@ -1,15 +1,16 @@
 
-%global git_revno 454
+%global git_revno 475
 
 Name:           openstack-packstack
 Version:        2012.2.3
 #Release:       1%{?dist}
-Release:        0.1.dev%{git_revno}%{?dist}
+Release:        0.5.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
-License:        ASL 2.0
-URL:            https://github.com/fedora-openstack/packstack
+License:        ASL 2.0 and GPLv2
+URL:            https://github.com/stackforge/packstack
+# Tarball is created by bin/release.sh
 #Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}.tar.gz
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
@@ -25,12 +26,21 @@ BuildRequires:  python-sphinx
 
 Requires:       openssh-clients
 Requires:       openstack-utils
+Requires:       packstack-modules-puppet = %{version}-%{release}
 
 %description
 Packstack is a utility that uses puppet modules to install openstack
 packstack can be used to deploy various parts of openstack on multiple
 pre installed servers over ssh. It does this be using puppet manifests to
 apply puppet labs modules (https://github.com/puppetlabs/)
+
+
+%package -n packstack-modules-puppet
+Summary:        Set of Puppet modules for OpenStack
+
+%description -n packstack-modules-puppet
+Set of Puppet modules used by Packstack to install OpenStack
+
 
 %prep
 #%setup -n packstack-%{version}
@@ -47,6 +57,7 @@ find packstack/puppet/modules \( -name spec -o -name ext \)  | xargs  rm -rf
 rm -rf %{_builddir}/puppet
 mv packstack/puppet %{_builddir}/puppet
 
+
 %build
 # puppet on fedora already has this module, using this one causes problems
 %if 0%{?fedora}
@@ -62,12 +73,18 @@ make man SPHINXBUILD=sphinx-1.0-build
 make man
 %endif
 
+
 %install
 %{__python} setup.py install --skip-build --root %{buildroot}
+
+mkdir -p %{buildroot}/%{_datadir}/packstack/
+mv %{_builddir}/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
+ln -s %{_datadir}/packstack/modules %{buildroot}/%{python_sitelib}/packstack/puppet/modules
 
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
+
 
 %files
 %doc LICENSE
@@ -76,7 +93,16 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{python_sitelib}/packstack-%{version}*.egg-info
 %{_mandir}/man1/packstack.1.gz
 
+
+%files -n packstack-modules-puppet
+%defattr(644,root,root,755)
+%{_datadir}/packstack/modules/
+
+
 %changelog
+* Wed Mar 13 2013 Martin Magr <mmagr@redhat.com> - 2012.2.3-0.5.dev475
+- Updated to version 2012.2.3dev475
+
 * Wed Feb 27 2013 Martin Magr <mmagr@redhat.com> - 2012.2.3-0.1.dev454
 - Updated to version 2012.2.3dev454
 - Fixes: rhbz#865347, rhbz#888725, rhbz#892247, rhbz#893107, rhbz#894733,
