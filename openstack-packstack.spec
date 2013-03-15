@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.1.dev%{git_revno}%{?dist}
+Release:        0.2.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -76,6 +76,9 @@ make man
 %install
 %{__python} setup.py install --skip-build --root %{buildroot}
 
+# Delete tests
+rm -fr %{buildroot}%{python_sitelib}/tests
+
 mkdir -p %{buildroot}/%{_datadir}/packstack/
 mv %{_builddir}/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
@@ -99,6 +102,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Fri Mar 15 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.2.dev502
+- remove tests
+
 * Fri Mar 15 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.1.dev502
 - Udated to grizzly (packstack-2013.1.1dev502.tar.gz)
 
