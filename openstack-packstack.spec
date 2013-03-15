@@ -1,18 +1,17 @@
 
-%global git_revno 475
+%global git_revno 502
 
 Name:           openstack-packstack
-Version:        2012.2.3
+Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.5.dev%{git_revno}%{?dist}
+Release:        0.1.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
-#Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}.tar.gz
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
 BuildArch:      noarch
 
@@ -100,6 +99,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Fri Mar 15 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.1.dev502
+- Udated to grizzly (packstack-2013.1.1dev502.tar.gz)
+
 * Wed Mar 13 2013 Martin Magr <mmagr@redhat.com> - 2012.2.3-0.5.dev475
 - Updated to version 2012.2.3dev475
 
