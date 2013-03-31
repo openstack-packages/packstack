@@ -1,18 +1,17 @@
 
-%global git_revno 475
+%global git_revno 527
 
 Name:           openstack-packstack
-Version:        2012.2.3
+Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.5.dev%{git_revno}%{?dist}
+Release:        0.3.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
-#Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}.tar.gz
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+Source0:        http://derekh.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
 BuildArch:      noarch
 
@@ -25,14 +24,12 @@ BuildRequires:  python-sphinx
 %endif
 
 Requires:       openssh-clients
-Requires:       openstack-utils
-Requires:       packstack-modules-puppet = %{version}-%{release}
 
 %description
 Packstack is a utility that uses puppet modules to install openstack
 packstack can be used to deploy various parts of openstack on multiple
-pre installed servers over ssh. It does this be using puppet manifests to
-apply puppet labs modules (https://github.com/puppetlabs/)
+pre installed servers over ssh. It does this by using puppet manifests to
+apply Puppet Labs modules (https://github.com/puppetlabs/)
 
 
 %package -n packstack-modules-puppet
@@ -77,10 +74,12 @@ make man
 %install
 %{__python} setup.py install --skip-build --root %{buildroot}
 
+# Delete tests
+rm -fr %{buildroot}%{python_sitelib}/tests
+
 mkdir -p %{buildroot}/%{_datadir}/packstack/
-mv %{_builddir}/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
-ln -s %{_datadir}/packstack/modules %{buildroot}/%{python_sitelib}/packstack/puppet/modules
+cp -r %{buildroot}/%{python_sitelib}/packstack/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
@@ -100,6 +99,18 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Sun Mar 31 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.3.dev527
+- update to packstack-2013.1.1dev527.tar.gz
+- no longer require openstack-utils
+- packstack now has its own copy of the puppet modules, the symbolic link
+  causes problems with package updates
+
+* Fri Mar 15 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.2.dev502
+- remove tests
+
+* Fri Mar 15 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.1.dev502
+- Udated to grizzly (packstack-2013.1.1dev502.tar.gz)
+
 * Wed Mar 13 2013 Martin Magr <mmagr@redhat.com> - 2012.2.3-0.5.dev475
 - Updated to version 2012.2.3dev475
 
