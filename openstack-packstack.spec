@@ -1,10 +1,10 @@
 
-%global git_revno 502
+%global git_revno 527
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.2.dev%{git_revno}%{?dist}
+Release:        0.3.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -24,14 +24,12 @@ BuildRequires:  python-sphinx
 %endif
 
 Requires:       openssh-clients
-Requires:       openstack-utils
-Requires:       packstack-modules-puppet = %{version}-%{release}
 
 %description
 Packstack is a utility that uses puppet modules to install openstack
 packstack can be used to deploy various parts of openstack on multiple
-pre installed servers over ssh. It does this be using puppet manifests to
-apply puppet labs modules (https://github.com/puppetlabs/)
+pre installed servers over ssh. It does this by using puppet manifests to
+apply Puppet Labs modules (https://github.com/puppetlabs/)
 
 
 %package -n packstack-modules-puppet
@@ -80,9 +78,8 @@ make man
 rm -fr %{buildroot}%{python_sitelib}/tests
 
 mkdir -p %{buildroot}/%{_datadir}/packstack/
-mv %{_builddir}/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
-ln -s %{_datadir}/packstack/modules %{buildroot}/%{python_sitelib}/packstack/puppet/modules
+cp -r %{buildroot}/%{python_sitelib}/packstack/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
@@ -102,6 +99,12 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Sun Mar 31 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.3.dev527
+- update to packstack-2013.1.1dev527.tar.gz
+- no longer require openstack-utils
+- packstack now has its own copy of the puppet modules, the symbolic link
+  causes problems with package updates
+
 * Fri Mar 15 2013 Derek Higgins <derekh@redhat.com> - 2013.1.1-0.2.dev502
 - remove tests
 
