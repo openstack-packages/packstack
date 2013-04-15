@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.5.dev%{git_revno}%{?dist}
+Release:        0.4.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -12,7 +12,6 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
-Patch1:         enable-epel-and-el6-grizzly.patch
 
 BuildArch:      noarch
 
@@ -43,9 +42,6 @@ Set of Puppet modules used by Packstack to install OpenStack
 %prep
 #%setup -n packstack-%{version}
 %setup -n packstack-%{version}dev%{git_revno}
-
-# el6-grizzly build: enabled EPEL and el6-grizzly repos by default
-%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} \;
@@ -103,9 +99,6 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
-* Mon Apr 15 2013 Alan Pevec <apevec@redhat.com> 2013.1.1-0.5.dev538
-- enable EPEL and el6-grizzly by default
-
 * Tue Apr 09 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.4.dev538
 - Updated to  packstack-2013.1.1dev538.tar.gz
 - Fixes: rhbz#946915, rhbz#947427
