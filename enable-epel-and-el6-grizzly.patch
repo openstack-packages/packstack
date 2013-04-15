@@ -1,0 +1,20 @@
+diff -ru packstack-2013.1.1dev538.orig/packstack/plugins/serverprep_901.py packstack-2013.1.1dev538/packstack/plugins/serverprep_901.py
+--- packstack-2013.1.1dev538.orig/packstack/plugins/serverprep_901.py	2013-04-09 04:47:16.000000000 -0700
++++ packstack-2013.1.1dev538/packstack/plugins/serverprep_901.py	2013-04-14 17:30:53.044132006 -0700
+@@ -35,7 +35,7 @@
+                    "PROMPT"          : "To subscribe each server to EPEL enter \"y\"",
+                    "OPTION_LIST"     : ["y", "n"],
+                    "VALIDATORS"      : [validators.validate_options],
+-                   "DEFAULT_VALUE"   : "n",
++                   "DEFAULT_VALUE"   : "y",
+                    "MASK_INPUT"      : False,
+                    "LOOSE_VALIDATION": True,
+                    "CONF_NAME"       : "CONFIG_USE_EPEL",
+@@ -410,6 +410,7 @@
+             server.append("grep -e 'Red Hat Enterprise Linux' -e 'CentOS' -e 'Scientific Linux' /etc/redhat-release && "
+                           "( rpm -q epel-release || yum install -y --nogpg -c $REPOFILE epel-release ) || echo -n ''")
+             server.append("rm -rf $REPOFILE")
++            server.append("( rpm -q rdo-release-grizzly || yum install -y --nogpg http://repos.fedorapeople.org/repos/openstack/openstack-grizzly/rdo-release-grizzly-1.noarch.rpm ) || echo -n ''")
+ 
+ 
+         # set highest priority of RHOS repository if EPEL is installed and
