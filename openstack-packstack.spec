@@ -1,10 +1,10 @@
 
-%global git_revno 538
+%global git_revno 601
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.4.dev%{git_revno}%{?dist}
+Release:        0.5.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Jun 04 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.5.dev601
+- Updated to packstack-2013.1.1dev601
+- Fixes: rhbz#953157, rhbz#966560, rhbz#967291, rhbz#967306, rhbz#967307,
+         rhbz#967344, rhbz#967348, rhbz#969975, rhbz#965787
+
 * Tue Apr 09 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.4.dev538
 - Updated to  packstack-2013.1.1dev538.tar.gz
 - Fixes: rhbz#946915, rhbz#947427
