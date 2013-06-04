@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.5.dev%{git_revno}%{?dist}
+Release:        0.8.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,10 +99,15 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
-* Tue Jun 04 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.5.dev601
+* Tue Jun 04 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.8.dev601
 - Updated to packstack-2013.1.1dev601
 - Fixes: rhbz#953157, rhbz#966560, rhbz#967291, rhbz#967306, rhbz#967307,
          rhbz#967344, rhbz#967348, rhbz#969975, rhbz#965787
+
+* Thu May 23 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.7.dev580
+- Removing call to setenforce (rhbz#954188)
+- Synchronize time using all ntp servers (rhbz#956939)
+- Fix for nagios multiple installation failures (rhbz#957006)
 
 * Tue Apr 09 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.4.dev538
 - Updated to  packstack-2013.1.1dev538.tar.gz
