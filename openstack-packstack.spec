@@ -1,10 +1,10 @@
 
-%global git_revno 601
+%global git_revno 605
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.8.dev%{git_revno}%{?dist}
+Release:        0.9.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Jun 05 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.9.dev605
+- Added whitespace filter to Nova and Quantum plugins (rhbz#970674)
+- Removed RDO repo installation procedure
+
 * Tue Jun 04 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.8.dev601
 - Updated to packstack-2013.1.1dev601
 - Fixes: rhbz#953157, rhbz#966560, rhbz#967291, rhbz#967306, rhbz#967307,
