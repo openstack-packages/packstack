@@ -1,10 +1,10 @@
 
-%global git_revno 620
+%global git_revno 621
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.11.dev%{git_revno}%{?dist}
+Release:        0.12.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,7 +99,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
-* Thu Jun 06 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.11.dev620
+* Thu Jun 06 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.12.dev621
 - Install qemu-kvm before libvirt (#957632)
 - Add template for quantum API server (#968513)
 - Removed SQL password in sql_connection for compute hosts (#966325)
