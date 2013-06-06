@@ -1,10 +1,10 @@
 
-%global git_revno 605
+%global git_revno 620
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.9.dev%{git_revno}%{?dist}
+Release:        0.11.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,13 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Thu Jun 06 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.11.dev620
+- Install qemu-kvm before libvirt (#957632)
+- Add template for quantum API server (#968513)
+- Removed SQL password in sql_connection for compute hosts (#966325)
+- Fixed color usage (#971075)
+- Activate cinder-volumes VG and scan PVs after reboot (#971145)
+
 * Tue Jun 05 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.9.dev605
 - Added whitespace filter to Nova and Quantum plugins (rhbz#970674)
 - Removed RDO repo installation procedure
