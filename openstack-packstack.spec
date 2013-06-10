@@ -1,10 +1,10 @@
 
-%global git_revno 621
+%global git_revno 622
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.12.dev%{git_revno}%{?dist}
+Release:        0.14.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Jun 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.14.dev622
+- Reverted Nova sql_connection changes because of introduced regression (#966325, #972365)
+
 * Thu Jun 06 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.12.dev621
 - Install qemu-kvm before libvirt (#957632)
 - Add template for quantum API server (#968513)
