@@ -1,10 +1,10 @@
 
-%global git_revno 622
+%global git_revno 632
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.14.dev%{git_revno}%{?dist}
+Release:        0.19.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,19 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Jun 18 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.19.dev632
+- Restart openstack-cinder-volume service (#975007)
+
+* Wed Jun 12 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.17.dev631
+- Updated Keystone puppet module to have token_format=PKI as default
+
+* Tue Jun 11 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.16.dev630
+- Always update kernel package (#972960)
+
+* Mon Jun 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.15.dev625
+- Omit Nova DB password only on compute nodes (#966325)
+- Find free device during host startup (#971145)
+
 * Mon Jun 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.14.dev622
 - Reverted Nova sql_connection changes because of introduced regression (#966325, #972365)
 
