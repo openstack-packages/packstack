@@ -44,11 +44,11 @@ Set of Puppet modules used by Packstack to install OpenStack
 %setup -n packstack-%{version}dev%{git_revno}
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
-find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} \;
-find packstack/puppet/modules \( -name "*.py" -o -name "*.rb" -o -name "*.pl" \) -exec sed -i '/^#!/{d;q}' {} \; -exec chmod -x {} \;
-find packstack/puppet/modules \( -name "*.sh" \) -exec sed -i 's/^#!.*/#!\/bin\/bash/g' {} \; -exec chmod +x {} \;
-find packstack/puppet/modules -name site.pp -size 0 -exec rm {} \;
-find packstack/puppet/modules \( -name spec -o -name ext \)  | xargs  rm -rf
+find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
+find packstack/puppet/modules \( -name "*.py" -o -name "*.rb" -o -name "*.pl" \) -exec sed -i '/^#!/{d;q}' {} + -exec chmod -x {} +
+find packstack/puppet/modules \( -name "*.sh" \) -exec sed -i 's/^#!.*/#!\/bin\/bash/g' {} + -exec chmod +x {} +
+find packstack/puppet/modules -name site.pp -size 0 -exec rm {} +
+find packstack/puppet/modules \( -name spec -o -name ext \) | xargs rm -rf
 
 # Moving this data directory out temporarily as it causes setup.py to throw errors
 rm -rf %{_builddir}/puppet
