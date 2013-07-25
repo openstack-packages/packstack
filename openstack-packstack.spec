@@ -1,10 +1,10 @@
 
-%global git_revno 642
+%global git_revno 651
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.20.dev%{git_revno}%{?dist}
+Release:        0.21.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Thu Jul 25 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.21.dev651
+- Swithed to https://github.com/packstack/puppet-qpid (#977786)
+- If allinone and quantum selected, install basic network (#986024)
+
 * Wed Jul 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.20.dev642
 - Fixed provider network option (#976380)
 - Made token_format configurable (#978853)
