@@ -1,10 +1,10 @@
 
-%global git_revno 651
+%global git_revno 653
 
 Name:           openstack-packstack
 Version:        2013.1.1
 #Release:       1%{?dist}
-Release:        0.21.dev%{git_revno}%{?dist}
+Release:        0.22.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Thu Aug 01 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.22.dev653
+- Enable qpidd on boot (#988803)
+
 * Thu Jul 25 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.21.dev651
 - Swithed to https://github.com/packstack/puppet-qpid (#977786)
 - If allinone and quantum selected, install basic network (#986024)
