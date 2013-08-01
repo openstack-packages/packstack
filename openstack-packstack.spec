@@ -1,10 +1,10 @@
 
-%global git_revno 653
+%global git_revno 691
 
 Name:           openstack-packstack
-Version:        2013.1.1
+Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.22.dev%{git_revno}%{?dist}
+Release:        0.1.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,14 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Thu Aug 01 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.1.dev691
+- Added support for Cinder GlusterFS backend configuration (#919607)
+- Added support for linuxbridge (#971770)
+- Service names made more descriptive (#947381)
+- Increased timeout of kernel update (#973217)
+- Set debug=true for Nova to have some logs (#958152)
+- kvm.modules is loaded only if it exists (#979041)
+
 * Thu Aug 01 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.22.dev653
 - Enable qpidd on boot (#988803)
 
