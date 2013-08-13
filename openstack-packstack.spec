@@ -1,10 +1,10 @@
 
-%global git_revno 691
+%global git_revno 702
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.1.dev%{git_revno}%{?dist}
+Release:        0.2.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,13 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Aug 13 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.2.dev702
+- ovs_use_veth=True is no longer required
+- Remove libvirt's default network (i.e. virbr0) to avoid confusion
+- Rename Quantum to Neutron
+- Added support for configuration of Cinder NFS backend driver (#916301)
+- Removed CONFIG_QUANTUM_USE_NAMESPACES option
+
 * Thu Aug 01 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.1.dev691
 - Added support for Cinder GlusterFS backend configuration (#919607)
 - Added support for linuxbridge (#971770)
