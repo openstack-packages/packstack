@@ -1,10 +1,10 @@
 
-%global git_revno 702
+%global git_revno 722
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.2.dev%{git_revno}%{?dist}
+Release:        0.3.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,16 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Aug 26 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.3.dev722
+- Use 3% more space for cinder-volumes (982622)
+- Changed the repository for the neutron submodule (#998286)
+- Added net.bridge.bridge-nf-call*=1 on compute nodes (#981144)
+- Fixed Rawhide support (#995872)
+- Inform about support only on RHEL (#975913)
+- Use multi validators in CONFIG_SWIFT_PROXY_HOSTS (#928969)
+- Correct CIDR values in case of invalid is given (#969977)
+- Accept IPv6 address and single IP in range parameters (#949704)
+
 * Tue Aug 13 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.2.dev702
 - ovs_use_veth=True is no longer required
 - Remove libvirt's default network (i.e. virbr0) to avoid confusion
