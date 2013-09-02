@@ -1,10 +1,10 @@
 
-%global git_revno 722
+%global git_revno 740
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.3.dev%{git_revno}%{?dist}
+Release:        0.4.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -99,6 +99,14 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Sep 2 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.4.dev740
+- Added GRE support (#1003120)
+- Added MySQL admin password confirmation (#977443)
+- Made MySQL installation optional (#890175)
+- Persist allinone OVS bridge (#991591)
+- Added the haproxy Puppet module
+- Default to use emX instead of ethX on Fedora
+
 * Mon Aug 26 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.3.dev722
 - Use 3% more space for cinder-volumes (982622)
 - Changed the repository for the neutron submodule (#998286)
