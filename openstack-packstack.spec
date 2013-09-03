@@ -24,6 +24,7 @@ BuildRequires:  python-sphinx
 %endif
 
 Requires:       openssh-clients
+Requires:       python-netaddr
 
 %description
 Packstack is a utility that uses puppet modules to install openstack
@@ -99,6 +100,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Sep 3 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.5.dev740
+- Added python-netaddr depencency
+
 * Mon Sep 2 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.4.dev740
 - Added GRE support (#1003120)
 - Added MySQL admin password confirmation (#977443)
