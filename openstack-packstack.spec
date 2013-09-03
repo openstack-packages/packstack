@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.4.dev%{git_revno}%{?dist}
+Release:        0.5.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
