@@ -1,10 +1,10 @@
 
-%global git_revno 749
+%global git_revno 752
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.6.dev%{git_revno}%{?dist}
+Release:        0.7.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Sep 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.7.dev752
+- Cinder fixes
+
 * Mon Sep 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.6.dev749
 - Added posibility to change Nova network manager (#915365)
 - Support for Ceilometer installation (#967310)
