@@ -1,10 +1,10 @@
 
-%global git_revno 752
+%global git_revno 754
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.7.dev%{git_revno}%{?dist}
+Release:        0.8.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Sep 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.8.dev754
+- Fixed KeyErrors in case VlanManager is not used (#1006214)
+
 * Mon Sep 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.7.dev752
 - Cinder fixes
 
