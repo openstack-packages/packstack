@@ -1,10 +1,10 @@
 
-%global git_revno 756
+%global git_revno 763
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.9.dev%{git_revno}%{?dist}
+Release:        0.10.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Sep 24 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.10.dev763
+- Adds "default-storage-engine=InnoDB" to /etc/my.cnf (#980593)
+- Accepts more CLI options (#985361)
+- Added GRE support (#1004397)
+
 * Mon Sep 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.9.dev756
 - Use python-pymongo for EL distros too (#1006401)
 
