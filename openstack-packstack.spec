@@ -1,10 +1,10 @@
 
-%global git_revno 763
+%global git_revno 806
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.10.dev%{git_revno}%{?dist}
+Release:        0.11.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,20 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Oct 17 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.11.dev806
+- Improved logging (lp#1228187)
+- Adds error checking when puppet fails internally (rhbz#958587)
+- Store iptables in file when testing netns (rhbz#1016773)
+- Got rid of create_resources module (rhbz#961049)
+- Creates keystonerc_admin for user (rhbz#964005, rhbz#976394)
+- Prescript plugin improvement (rhbz#976787, rhbz#967369)
+- Enable optional channel when RHSM is used (rhbz#978651)
+- Changes error message in certain cases (rhbz#989334, rhbz#1006476, rhbz#1003959)
+- Rephrase support message (rhbz#991801)
+- Adds support for multihost nova-network (rhbz#1001916)
+- Adds Firewall rules for access to OpenStack components (rhbz#1002063)
+- Allows overlapping IPs for Neutron (rhbz#1008863)
+
 * Tue Sep 24 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.10.dev763
 - Adds "default-storage-engine=InnoDB" to /etc/my.cnf (#980593)
 - Accepts more CLI options (#985361)
