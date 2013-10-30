@@ -1,10 +1,10 @@
 
-%global git_revno 806
+%global git_revno 835
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.11.dev%{git_revno}%{?dist}
+Release:        0.12.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,20 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Wed Oct 30 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.12.dev835
+- Ensure horizon SSL is configured when enabled (rhbz#966094)
+- Improves EPEL and RDO repo setup (rhbz#974971, rhbz#990642)
+- Ensure Nova Network-compatible demo provisioning (lp#1242668)
+- Include Logging and Debug info to packstack docs (rhbz#999929)
+- Added Swift hash setting (rhbz#1005727)
+- Change msg with Exec resource too (rhbz#1022044)
+- Added SSL configuration to qpid (rhbz#1022312)
+- Fixes Neutron firewall rule creation on wrong host (#1023561)
+- Fixed str formating (rhbz#1022580)
+- Use rpm -q --whatprovides as a more general check
+- Add puppet-certmonger as a submodule
+- Exposes tempest uri/branch selection if provision-tempest is y
+
 * Tue Oct 17 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.11.dev806
 - Improved logging (lp#1228187)
 - Adds error checking when puppet fails internally (rhbz#958587)
