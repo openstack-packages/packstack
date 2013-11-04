@@ -1,10 +1,10 @@
 
-%global git_revno 835
+%global git_revno 840
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.12.dev%{git_revno}%{?dist}
+Release:        0.13.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Nov 4 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.13.dev840
+- Update Horizon submodule to the latest (rhbz#988316)
+- Fixes EPEL problem (rhbz#1025437)
+
 * Wed Oct 30 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.12.dev835
 - Ensure horizon SSL is configured when enabled (rhbz#966094)
 - Improves EPEL and RDO repo setup (rhbz#974971, rhbz#990642)
