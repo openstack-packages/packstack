@@ -1,10 +1,10 @@
 
-%global git_revno 846
+%global git_revno 847
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.14.dev%{git_revno}%{?dist}
+Release:        0.15.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,7 +100,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
-* Mon Nov 13 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.14.dev846
+* Thu Nov 14 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.15.dev847
+- Use packstack fork of puppet-keystone (rhbz#1022686)
+
+* Wed Nov 13 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.14.dev846
 - Module update (rhbz#1026279)
 
 * Mon Nov 4 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.13.dev840
