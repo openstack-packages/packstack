@@ -1,10 +1,10 @@
 
-%global git_revno 847
+%global git_revno 870
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.15.dev%{git_revno}%{?dist}
+Release:        0.16.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,18 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Dec 2 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.16.dev870
+- Add information on location of horizon password (rhbz#1002326)
+- Make network_vlan_ranges available in GRE setups (rhbz#1006534)
+- Include the host's FQDN in Horizon's ALLOWED_HOSTS (rhbz#1028678)
+- Improve error reporting for shell commands (rhbz#1031786)
+- Fixed comments for interactive installation (rhbz#1030767)
+- Replace qpid_host with qpid_hostname (lp#1242715)
+- Make sure iptables are enabled (rhbz#1023955)
+- Align packstack templates with ceilometer upstream git repo (rhbz#1022189)
+- Add missing options to packstack man page (rhbz#1032103)
+- Disable unsupported features in Horizon for RHOS (rhbz#1035651)
+
 * Thu Nov 14 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.15.dev847
 - Use packstack fork of puppet-keystone (rhbz#1022686)
 
