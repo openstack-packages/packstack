@@ -1,10 +1,10 @@
 
-%global git_revno 870
+%global git_revno 876
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.16.dev%{git_revno}%{?dist}
+Release:        0.17.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Dec 3 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.17.dev876
+- Add information on location of horizon password (rhbz#1002326)
+- Updates puppet-ceilometer module so it won't fails as 2013.2.1-0.16.dev870 do
+
 * Mon Dec 2 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.16.dev870
 - Add information on location of horizon password (rhbz#1002326)
 - Make network_vlan_ranges available in GRE setups (rhbz#1006534)
