@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.18.dev%{git_revno}%{?dist}
+Release:        0.19.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -82,6 +82,8 @@ mkdir -p %{buildroot}/%{_datadir}/packstack/
 mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
 cp -r %{buildroot}/%{python_sitelib}/packstack/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 
+mkdir -p -m 777 %{buildroot}/var/log/packstack/
+
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
@@ -92,6 +94,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{python_sitelib}/packstack
 %{python_sitelib}/packstack-%{version}*.egg-info
 %{_mandir}/man1/packstack.1.gz
+/var/log/packstack/
 
 
 %files -n packstack-modules-puppet
@@ -100,7 +103,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
-* Mon Dec 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.18.dev919
+* Mon Dec 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.19.dev919
 - Moves packstack logs to /var/log/packstack (#999923)
 - Doesn't set up the L3_EXT_BRIDGE twice(rhbz#1000981)
 - Updates puppet-nova module (#1015995)
