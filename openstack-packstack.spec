@@ -1,10 +1,10 @@
 
-%global git_revno 876
+%global git_revno 919
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.17.dev%{git_revno}%{?dist}
+Release:        0.18.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,25 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Dec 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.18.dev919
+- Moves packstack logs to /var/log/packstack (#999923)
+- Doesn't set up the L3_EXT_BRIDGE twice(rhbz#1000981)
+- Updates puppet-nova module (#1015995)
+- Adds support for LBaaS agent (#1019780)
+- Adds validation for gluster volumes using hostnames (#1020479)
+- Validates type of given ssh key (#1022477)
+- Doesn't touch NetworkManager and iptables (rhbz#1024292, rhbz#1023955)
+- Updates puppet-certmonger module and puppet-pacemaker module (rhbz#1027455)
+- Adds puppet-openstack-storage (rhbz#1027460)
+- Adds missing options to packstack man page (rhbz#1032103)
+- Adds support for cinder::backup::swift (rhbz#1021627)
+- Adds auth option to qpid (rhbz#972643)
+- Fixes errors when nova is disabled (rhbz#987888, rhbz#1024564, rhbz#1026795)
+- Fixes the nova_ceilometer.pp template (rhbz#1032070)
+- Fixes heat installer when executed in interactive mode
+- Updates puppet-neutron module to latest stable/havana branch (rhbz#1017280)
+- Added the help_url pointing to RH doc (rhbz#1030398)
+
 * Tue Dec 3 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.17.dev876
 - Add information on location of horizon password (rhbz#1002326)
 - Updates puppet-ceilometer module so it won't fails as 2013.2.1-0.16.dev870 do
