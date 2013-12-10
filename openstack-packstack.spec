@@ -1,10 +1,10 @@
 
-%global git_revno 919
+%global git_revno 924
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.19.dev%{git_revno}%{?dist}
+Release:        0.20.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -103,6 +103,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Dec 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.20.dev924
+- Adds cinder API v2 endpoint to keystone (rhbz#1030088)
+- Upgrades DB before neutron server starts (rhbz#1037675)
+- Adds localhost to the list of Horizon's ALLOWED_HOSTS
+
 * Mon Dec 9 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.19.dev919
 - Moves packstack logs to /var/log/packstack (#999923)
 - Doesn't set up the L3_EXT_BRIDGE twice(rhbz#1000981)
