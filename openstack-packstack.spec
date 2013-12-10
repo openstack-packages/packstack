@@ -1,10 +1,10 @@
 
-%global git_revno 924
+%global git_revno 925
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.20.dev%{git_revno}%{?dist}
+Release:        0.21.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -103,6 +103,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Dec 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.21.dev925
+- NEUTRON_LBAAS_HOSTS should be empty by default (rhbz#1040039)
+
 * Tue Dec 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.20.dev924
 - Adds cinder API v2 endpoint to keystone (rhbz#1030088)
 - Upgrades DB before neutron server starts (rhbz#1037675)
