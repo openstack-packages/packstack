@@ -1,10 +1,10 @@
 
-%global git_revno 925
+%global git_revno 930
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.21.dev%{git_revno}%{?dist}
+Release:        0.22.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -82,8 +82,6 @@ mkdir -p %{buildroot}/%{_datadir}/packstack/
 mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
 cp -r %{buildroot}/%{python_sitelib}/packstack/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
 
-mkdir -p -m 777 %{buildroot}/var/log/packstack/
-
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
@@ -94,7 +92,6 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %{python_sitelib}/packstack
 %{python_sitelib}/packstack-%{version}*.egg-info
 %{_mandir}/man1/packstack.1.gz
-/var/log/packstack/
 
 
 %files -n packstack-modules-puppet
@@ -103,6 +100,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Wed Dec 11 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.22.dev930
+- Allow Ceilometer API for all hosts (rhbz#1040404)
+- Require also core_plugin setting
+- Revert "Move packstack logs to /var/log/packstack" due to security reasons
+
 * Tue Dec 10 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.21.dev925
 - NEUTRON_LBAAS_HOSTS should be empty by default (rhbz#1040039)
 
