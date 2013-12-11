@@ -1,10 +1,10 @@
 
-%global git_revno 930
+%global git_revno 934
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.22.dev%{git_revno}%{?dist}
+Release:        0.23.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -100,6 +100,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Wed Dec 11 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.22.dev930
+- CONFIG_NEUTRON_LBAAS_HOSTS should be empty in allinone (rhbz#1040585)
+- service_plugins must not be list with empty string (rhbz#1040585)
+
 * Wed Dec 11 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.22.dev930
 - Allow Ceilometer API for all hosts (rhbz#1040404)
 - Require also core_plugin setting
