@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.24.dev%{git_revno}%{?dist}
+Release:        0.25.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -12,6 +12,9 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+
+Patch1:         packstack-puppet-3.4.patch
+Patch2:         neutron-puppet-3.4.patch
 
 BuildArch:      noarch
 
@@ -43,6 +46,9 @@ Set of Puppet modules used by Packstack to install OpenStack
 %prep
 #%setup -n packstack-%{version}
 %setup -n packstack-%{version}dev%{git_revno}
+
+%patch1 -p1
+%patch2 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -100,6 +106,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Fri Dec 20 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.25.dev936
+- Use correct syntax to install multiple packages (rhbz#1045283)
+
 * Fri Dec 20 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.24.dev936
 - Reinstate the V1 API needed by cinder client (rhbz#1043280)
 - Use class for notifier strategy (rhbz#1020002)

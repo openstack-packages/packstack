@@ -1,0 +1,49 @@
+From 58c42fd69eb74a436d837173f3055f31aa56d6e0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?P=C3=A1draig=20Brady?= <P@draigBrady.com>
+Date: Fri, 20 Dec 2013 11:51:04 +0000
+Subject: [PATCH] use correct syntax to install multiple packages
+
+The incorrect syntax is rejected by puppet >= 3.4
+---
+ packstack/puppet/templates/horizon.pp          |    6 +++---
+ packstack/puppet/templates/openstack_client.pp |   10 ++++------
+ 2 files changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/packstack/puppet/templates/horizon.pp b/packstack/puppet/templates/horizon.pp
+index f7d5086..925709f 100644
+--- a/packstack/puppet/templates/horizon.pp
++++ b/packstack/puppet/templates/horizon.pp
+@@ -1,7 +1,7 @@
+ 
+-package {"horizon-packages":
+-    name => ["python-memcached", "python-netaddr"],
+-    notify => Class["horizon"],
++$horizon_packages = ["python-memcached", "python-netaddr"]
++package {$horizon_packages:
++    notify => Class["horizon"]
+ }
+ 
+ file {"/etc/httpd/conf.d/rootredirect.conf":
+diff --git a/packstack/puppet/templates/openstack_client.pp b/packstack/puppet/templates/openstack_client.pp
+index cde718c..6a04879 100644
+--- a/packstack/puppet/templates/openstack_client.pp
++++ b/packstack/puppet/templates/openstack_client.pp
+@@ -1,11 +1,9 @@
+ 
+-package {"clientdeps":
+-    name => ["python-iso8601"]
+-}
++$clientdeps = ["python-iso8601"]
++package { $clientdeps: }
+ 
+-package {"clientlibs":
+-    name => ["python-novaclient", "python-keystoneclient", "python-glanceclient", "python-swiftclient", "python-cinderclient"]
+-}
++$clientlibs = ["python-novaclient", "python-keystoneclient", "python-glanceclient", "python-swiftclient", "python-cinderclient"]
++package { $clientlibs: }
+ 
+ $rcadmin_content = "export OS_USERNAME=admin
+ export OS_TENANT_NAME=admin
+-- 
+1.7.7.6
+
