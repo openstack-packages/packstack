@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.26.dev%{git_revno}%{?dist}
+Release:        0.27.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -108,7 +108,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
-* Fri Jan 04 2014 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.26.dev936
+* Fri Jan 04 2014 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.27.dev936
 - Don't set libvirt_vif_driver no longer supported by nova (rhbz#1048315)
 
 * Fri Dec 20 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.25.dev936
