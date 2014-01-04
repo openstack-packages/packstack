@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.25.dev%{git_revno}%{?dist}
+Release:        0.26.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -15,6 +15,7 @@ Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{ve
 
 Patch1:         packstack-puppet-3.4.patch
 Patch2:         neutron-puppet-3.4.patch
+Patch3:         packstack-libvirt_vif_driver.patch
 
 BuildArch:      noarch
 
@@ -49,6 +50,7 @@ Set of Puppet modules used by Packstack to install OpenStack
 
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -106,6 +108,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Fri Jan 04 2014 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.26.dev936
+- Don't set libvirt_vif_driver no longer supported by nova (rhbz#1048315)
+
 * Fri Dec 20 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.25.dev936
 - Use correct syntax to install multiple packages (rhbz#1045283)
 

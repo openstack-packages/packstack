@@ -1,0 +1,35 @@
+From 56509ebd1b41cfcd27b12828175954219b9211a2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?P=C3=A1draig=20Brady?= <pbrady@redhat.com>
+Date: Sat, 4 Jan 2014 02:30:11 +0000
+Subject: [PATCH] remove unsupported libvirt_vif_driver nova.conf setting
+
+This was deprecated in Havana, and unsupported in Icehouse since:
+https://review.openstack.org/#/c/49660/
+
+This causes a nova compute service startup failure
+when setting up OVS with neutron (the default setup).
+
+Change-Id: I7419bea9443dae353ac46191a6d66704b14e3971
+---
+ packstack/plugins/nova_300.py |    5 -----
+ 1 files changed, 0 insertions(+), 5 deletions(-)
+
+diff --git a/packstack/plugins/nova_300.py b/packstack/plugins/nova_300.py
+index c18afd5..fb2f375 100644
+--- a/packstack/plugins/nova_300.py
++++ b/packstack/plugins/nova_300.py
+@@ -575,11 +575,6 @@ def createneutronmanifest(config):
+     if controller.CONF['CONFIG_NEUTRON_INSTALL'] != "y":
+         return
+ 
+-    if controller.CONF['CONFIG_NEUTRON_L2_PLUGIN'] == 'openvswitch':
+-        controller.CONF['CONFIG_NOVA_LIBVIRT_VIF_DRIVER'] = 'nova.virt.libvirt.vif.LibvirtHybridOVSBridgeDriver'
+-    else:
+-        controller.CONF['CONFIG_NOVA_LIBVIRT_VIF_DRIVER'] = 'nova.virt.libvirt.vif.LibvirtGenericVIFDriver'
+-
+     for manifestfile, marker in manifestfiles.getFiles():
+         if manifestfile.endswith("_nova.pp"):
+             data = getManifestTemplate("nova_neutron.pp")
+-- 
+1.7.7.6
+
