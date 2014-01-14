@@ -1,10 +1,10 @@
 
-%global git_revno 936
+%global git_revno 956
 
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.27.dev%{git_revno}%{?dist}
+Release:        0.29.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -12,10 +12,6 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
-
-Patch1:         packstack-puppet-3.4.patch
-Patch2:         neutron-puppet-3.4.patch
-Patch3:         packstack-libvirt_vif_driver.patch
 
 BuildArch:      noarch
 
@@ -47,10 +43,6 @@ Set of Puppet modules used by Packstack to install OpenStack
 %prep
 #%setup -n packstack-%{version}
 %setup -n packstack-%{version}dev%{git_revno}
-
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -108,6 +100,19 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Mon Jan 13 2014 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.29.dev956
+- Fixes qpid SSL installation errors (rhbz#1052163, rhbz#1048705)
+- Open Keystone port for ALL (rhbz#1041560)
+
+* Fri Jan 10 2014 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.28.dev948
+- Move to the upstream puppet-vswitch module
+- Add missing example options (rhbz#971745)
+- Removed patches since they are not needed anymore
+- Install php only with nagios (rhbz#1039660)
+- Change puppet-qpid module to upstream (rhbz#1029576)
+- Update puppet-neutron to stable/havana which contains fixes for Puppet 3.4+ (lp#1267488)
+- Updated puppet-swift to stable/havana (rhbz#1039981)
+
 * Fri Jan 04 2014 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.27.dev936
 - Don't set libvirt_vif_driver no longer supported by nova (rhbz#1048315)
 
