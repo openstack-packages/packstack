@@ -4,7 +4,7 @@
 Name:           openstack-packstack
 Version:        2013.2.1
 #Release:       1%{?dist}
-Release:        0.29.dev%{git_revno}%{?dist}
+Release:        0.30.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,7 +17,7 @@ BuildArch:      noarch
 
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
-%if 0%{?rhel}
+%if 0%{?rhel} == 6
 BuildRequires:  python-sphinx10
 %else
 BuildRequires:  python-sphinx
@@ -65,7 +65,7 @@ mv packstack/puppet %{_builddir}/puppet
 %{__python} setup.py build
 
 cd docs
-%if 0%{?rhel}
+%if 0%{?rhel} == 6
 make man SPHINXBUILD=sphinx-1.0-build
 %else
 make man
@@ -100,6 +100,10 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 
 %changelog
+* Tue Feb 04 2014 Matthias Runge <mrunge@redhat.com> - 2013.2.1-0.30.dev956
+- fix build related issue on el7
+- fix bogus date in changelogs
+
 * Mon Jan 13 2014 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.29.dev956
 - Fixes qpid SSL installation errors (rhbz#1052163, rhbz#1048705)
 - Open Keystone port for ALL (rhbz#1041560)
@@ -113,7 +117,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 - Update puppet-neutron to stable/havana which contains fixes for Puppet 3.4+ (lp#1267488)
 - Updated puppet-swift to stable/havana (rhbz#1039981)
 
-* Fri Jan 04 2014 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.27.dev936
+* Fri Jan 03 2014 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.27.dev936
 - Don't set libvirt_vif_driver no longer supported by nova (rhbz#1048315)
 
 * Fri Dec 20 2013 Pádraig Brady <pbrady@redhat.com> - 2013.2.1-0.25.dev936
@@ -199,7 +203,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 - Add puppet-certmonger as a submodule
 - Exposes tempest uri/branch selection if provision-tempest is y
 
-* Tue Oct 17 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.11.dev806
+* Thu Oct 17 2013 Martin Mágr <mmagr@redhat.com> - 2013.2.1-0.11.dev806
 - Improved logging (lp#1228187)
 - Adds error checking when puppet fails internally (rhbz#958587)
 - Store iptables in file when testing netns (rhbz#1016773)
@@ -304,7 +308,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 - Fixed color usage (#971075)
 - Activate cinder-volumes VG and scan PVs after reboot (#971145)
 
-* Tue Jun 05 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.9.dev605
+* Wed Jun 05 2013 Martin Mágr <mmagr@redhat.com> - 2013.1.1-0.9.dev605
 - Added whitespace filter to Nova and Quantum plugins (rhbz#970674)
 - Removed RDO repo installation procedure
 
