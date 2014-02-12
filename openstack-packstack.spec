@@ -1,10 +1,12 @@
+%global with_doc %{!?_without_doc:1}%{?_without_doc:0}
+%global git_revno 991
 
-%global git_revno 956
+
+# openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2013.2.1
-#Release:       1%{?dist}
-Release:        0.30.dev%{git_revno}%{?dist}
+Version:        2014.1.1
+Release:        0.1.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,31 +19,49 @@ BuildArch:      noarch
 
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
+
+Requires:       openssh-clients
+Requires:       python-netaddr
+Requires:       openstack-packstack-puppet == %{version}-%{release}
+Requires:       openstack-puppet-modules
+
+%description
+Packstack is a utility that uses Puppet modules to install OpenStack. Packstack
+can be used to deploy various parts of OpenStack on multiple pre installed
+servers over ssh.
+
+
+# openstack-packstack-puppet ---------------------------------------------------
+
+%package puppet
+Summary:        Packstack Puppet module
+Group:          Development/Libraries
+
+%description puppet
+Puppet module used by Packstack to install OpenStack
+
+
+# openstack-packstack-doc ------------------------------------------------------
+
+%if 0%{?with_doc}
+%package doc
+Summary:          Documentation for Packstack
+Group:            Documentation
+
 %if 0%{?rhel} == 6
 BuildRequires:  python-sphinx10
 %else
 BuildRequires:  python-sphinx
 %endif
 
-Requires:       openssh-clients
-Requires:       python-netaddr
-
-%description
-Packstack is a utility that uses puppet modules to install openstack
-packstack can be used to deploy various parts of openstack on multiple
-pre installed servers over ssh. It does this by using puppet manifests to
-apply Puppet Labs modules (https://github.com/puppetlabs/)
+%description doc
+This package contains documentation files for Packstack.
+%endif
 
 
-%package -n packstack-modules-puppet
-Summary:        Set of Puppet modules for OpenStack
-
-%description -n packstack-modules-puppet
-Set of Puppet modules used by Packstack to install OpenStack
-
+# prep -------------------------------------------------------------------------
 
 %prep
-#%setup -n packstack-%{version}
 %setup -n packstack-%{version}dev%{git_revno}
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
@@ -56,21 +76,22 @@ rm -rf %{_builddir}/puppet
 mv packstack/puppet %{_builddir}/puppet
 
 
-%build
-# puppet on fedora already has this module, using this one causes problems
-%if 0%{?fedora}
-    rm -rf %{_builddir}/puppet/modules/create_resources
-%endif
+# build ------------------------------------------------------------------------
 
+%build
 %{__python} setup.py build
 
+%if 0%{?with_doc}
 cd docs
 %if 0%{?rhel} == 6
 make man SPHINXBUILD=sphinx-1.0-build
 %else
 make man
 %endif
+%endif
 
+
+# install ----------------------------------------------------------------------
 
 %install
 %{__python} setup.py install --skip-build --root %{buildroot}
@@ -78,28 +99,43 @@ make man
 # Delete tests
 rm -fr %{buildroot}%{python_sitelib}/tests
 
-mkdir -p %{buildroot}/%{_datadir}/packstack/
-mv %{_builddir}/puppet %{buildroot}/%{python_sitelib}/packstack/puppet
-cp -r %{buildroot}/%{python_sitelib}/packstack/puppet/modules  %{buildroot}/%{_datadir}/packstack/modules
+# Install Puppet module
+mkdir -p %{buildroot}/%{_datadir}/openstack-puppet/modules
+cp -r %{_builddir}/puppet/modules/packstack  %{buildroot}/%{_datadir}/openstack-puppet/modules/
 
+%if 0%{?with_doc}
 mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
+%endif
 
+
+# files ------------------------------------------------------------------------
 
 %files
 %doc LICENSE
 %{_bindir}/packstack
 %{python_sitelib}/packstack
 %{python_sitelib}/packstack-%{version}*.egg-info
-%{_mandir}/man1/packstack.1.gz
 
-
-%files -n packstack-modules-puppet
+%files puppet
 %defattr(644,root,root,755)
-%{_datadir}/packstack/modules/
+%{_datadir}/openstack-puppet/modules/packstack
 
+%if 0%{?with_doc}
+%files doc
+%{_mandir}/man1/packstack.1.gz
+%endif
+
+
+# changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Feb 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.1.dev991
+- Added openstack-packstack-doc subpackage
+- Added openstack-packstack-puppet subpackage (rhbz#1063980)
+- Removed packstack-puppet-modules subpackage (rhbz#1063980)
+- Added openstack-puppet-modules require (rhbz#1063980)
+
 * Tue Feb 04 2014 Matthias Runge <mrunge@redhat.com> - 2013.2.1-0.30.dev956
 - fix build related issue on el7
 - fix bogus date in changelogs
