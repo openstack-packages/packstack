@@ -1,5 +1,5 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 991
+%global git_revno 992
 
 
 # openstack-packstack ----------------------------------------------------------
@@ -130,7 +130,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Mon Feb 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.1.dev991
+* Mon Feb 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.1.dev992
 - Added openstack-packstack-doc subpackage
 - Added openstack-packstack-puppet subpackage (rhbz#1063980)
 - Removed packstack-puppet-modules subpackage (rhbz#1063980)
