@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 992
+%global git_revno 1018
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.1.dev%{git_revno}%{?dist}
+Release:        0.2.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -14,6 +14,8 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+
+Patch0:         qpid-conf.patch
 
 BuildArch:      noarch
 
@@ -63,6 +65,7 @@ This package contains documentation files for Packstack.
 
 %prep
 %setup -n packstack-%{version}dev%{git_revno}
+%patch0 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -101,8 +104,11 @@ rm -fr %{buildroot}%{python_sitelib}/tests
 
 # Install Puppet module
 mkdir -p %{buildroot}/%{_datadir}/openstack-puppet/modules
-mv %{_builddir}/puppet/templates %{buildroot}/%{python_sitelib}/packstack/puppet/
 cp -r %{_builddir}/puppet/modules/packstack  %{buildroot}/%{_datadir}/openstack-puppet/modules/
+
+# Move Puppet manifest templates back to original place
+mkdir -p %{buildroot}/%{python_sitelib}/packstack/puppet
+mv %{_builddir}/puppet/templates %{buildroot}/%{python_sitelib}/packstack/puppet/
 
 %if 0%{?with_doc}
 mkdir -p %{buildroot}%{_mandir}/man1
@@ -131,6 +137,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Mar 22 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.2.dev1018
+- Added qpid-conf.patch
+
 * Mon Feb 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.1.dev992
 - Added openstack-packstack-doc subpackage
 - Added openstack-packstack-puppet subpackage (rhbz#1063980)
