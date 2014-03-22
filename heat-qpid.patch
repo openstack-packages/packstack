@@ -1,0 +1,95 @@
+From 9af00c06b469385fb6dacd77b47d39cd902179fc Mon Sep 17 00:00:00 2001
+From: Lars Kellogg-Stedman <lars@redhat.com>
+Date: Fri, 21 Mar 2014 16:23:28 -0400
+Subject: [PATCH] convert heat templates to use CONFIG_AMQP_ variables
+
+The heat_cfn.pp and heat_cloudwatch.pp templates were still referenceing
+obsolete CONFIG_QPID_* variables.  This patch updates packstack to
+select either rabbitmq or qpid based templates using get_mq(), and adds
+heat_qpid.pp as a complement to the existing heat_rabbitmq.pp.
+
+This patch also corrects a variable name (rabbit_user --> rabbit_userid)
+and an rpc implementation name (heat.openstack.common.rpc.impl_rabbit ->
+heat.openstack.common.rpc.impl_kombu).
+
+Change-Id: I9494d64eb4ed92984c563a215d432f93e3003dfc
+Closes-bug: 1295810
+---
+ packstack/puppet/templates/heat_cfn.pp        |   13 -------------
+ packstack/puppet/templates/heat_cloudwatch.pp |   13 -------------
+ packstack/puppet/templates/heat_qpid.pp       |    1 -
+ packstack/puppet/templates/heat_rabbitmq.pp   |    5 ++---
+ 4 files changed, 2 insertions(+), 30 deletions(-)
+
+diff --git a/packstack/puppet/templates/heat_cfn.pp b/packstack/puppet/templates/heat_cfn.pp
+index 2bc174f..cedc917 100644
+--- a/packstack/puppet/templates/heat_cfn.pp
++++ b/packstack/puppet/templates/heat_cfn.pp
+@@ -1,16 +1,3 @@
+-
+-class { 'heat':
+-    keystone_host     => '%(CONFIG_KEYSTONE_HOST)s',
+-    keystone_password => '%(CONFIG_HEAT_KS_PW)s',
+-    auth_uri          => 'http://%(CONFIG_KEYSTONE_HOST)s:35357/v2.0',
+-    rpc_backend       => 'heat.openstack.common.rpc.impl_qpid',
+-    qpid_hostname     => '%(CONFIG_QPID_HOST)s',
+-    qpid_username     => '%(CONFIG_QPID_AUTH_USER)s',
+-    qpid_password     => '%(CONFIG_QPID_AUTH_PASSWORD)s',
+-    verbose           => true,
+-    debug             => %(CONFIG_DEBUG_MODE)s,
+-}
+-
+ class {"heat::db":
+     sql_connection => "mysql://heat:%(CONFIG_HEAT_DB_PW)s@%(CONFIG_MYSQL_HOST)s/heat"
+ }
+diff --git a/packstack/puppet/templates/heat_cloudwatch.pp b/packstack/puppet/templates/heat_cloudwatch.pp
+index cc3190b..3e89d99 100644
+--- a/packstack/puppet/templates/heat_cloudwatch.pp
++++ b/packstack/puppet/templates/heat_cloudwatch.pp
+@@ -1,16 +1,3 @@
+-
+-class { 'heat':
+-    keystone_host     => '%(CONFIG_KEYSTONE_HOST)s',
+-    keystone_password => '%(CONFIG_HEAT_KS_PW)s',
+-    auth_uri          => 'http://%(CONFIG_KEYSTONE_HOST)s:35357/v2.0',
+-    rpc_backend       => 'heat.openstack.common.rpc.impl_qpid',
+-    qpid_hostname     => '%(CONFIG_QPID_HOST)s',
+-    qpid_username     => '%(CONFIG_QPID_AUTH_USER)s',
+-    qpid_password     => '%(CONFIG_QPID_AUTH_PASSWORD)s',
+-    verbose           => true,
+-    debug             => %(CONFIG_DEBUG_MODE)s,
+-}
+-
+ class {"heat::db":
+     sql_connection => "mysql://heat:%(CONFIG_HEAT_DB_PW)s@%(CONFIG_MYSQL_HOST)s/heat"
+ }
+diff --git a/packstack/puppet/templates/heat_qpid.pp b/packstack/puppet/templates/heat_qpid.pp
+index 0987e36..97040c3 100644
+--- a/packstack/puppet/templates/heat_qpid.pp
++++ b/packstack/puppet/templates/heat_qpid.pp
+@@ -1,4 +1,3 @@
+-
+ class { 'heat':
+     keystone_host     => '%(CONFIG_KEYSTONE_HOST)s',
+     keystone_password => '%(CONFIG_HEAT_KS_PW)s',
+diff --git a/packstack/puppet/templates/heat_rabbitmq.pp b/packstack/puppet/templates/heat_rabbitmq.pp
+index 39da125..14c8ad6 100644
+--- a/packstack/puppet/templates/heat_rabbitmq.pp
++++ b/packstack/puppet/templates/heat_rabbitmq.pp
+@@ -1,11 +1,10 @@
+-
+ class { 'heat':
+     keystone_host     => '%(CONFIG_KEYSTONE_HOST)s',
+     keystone_password => '%(CONFIG_HEAT_KS_PW)s',
+     auth_uri          => 'http://%(CONFIG_KEYSTONE_HOST)s:35357/v2.0',
+-    rpc_backend       => 'heat.openstack.common.rpc.impl_rabbit',
++    rpc_backend       => 'heat.openstack.common.rpc.impl_kombu',
+     rabbit_host       => '%(CONFIG_AMQP_HOST)s',
+-    rabbit_user  => '%(CONFIG_AMQP_AUTH_USER)s',
++    rabbit_userid     => '%(CONFIG_AMQP_AUTH_USER)s',
+     rabbit_password   => '%(CONFIG_AMQP_AUTH_PASSWORD)s',
+     verbose           => true,
+     debug             => %(CONFIG_DEBUG_MODE)s,
+-- 
+1.7.7.6
+
