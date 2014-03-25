@@ -1,0 +1,12 @@
+diff -Naur packstack-2014.1.1dev1018.orig/packstack/plugins/prescript_000.py packstack-2014.1.1dev1018/packstack/plugins/prescript_000.py
+--- packstack-2014.1.1dev1018.orig/packstack/plugins/prescript_000.py	2014-03-20 19:22:06.000000000 +0000
++++ packstack-2014.1.1dev1018/packstack/plugins/prescript_000.py	2014-03-25 00:40:15.645894886 +0000
+@@ -120,7 +120,7 @@
+                    "PROMPT"          : "Should Packstack install OpenStack Object Storage (Swift)",
+                    "OPTION_LIST"     : ["y", "n"],
+                    "VALIDATORS"      : [validators.validate_options],
+-                   "DEFAULT_VALUE"   : "y",
++                   "DEFAULT_VALUE"   : "n",
+                    "MASK_INPUT"      : False,
+                    "LOOSE_VALIDATION": False,
+                    "CONF_NAME"       : "CONFIG_SWIFT_INSTALL",
