@@ -6,7 +6,7 @@
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.3.dev%{git_revno}%{?dist}
+Release:        0.4.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,6 +17,7 @@ Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{ve
 
 Patch0:         qpid-conf.patch
 Patch1:         heat-qpid.patch
+Patch2:         disable-swift.patch
 
 BuildArch:      noarch
 
@@ -68,6 +69,7 @@ This package contains documentation files for Packstack.
 %setup -n packstack-%{version}dev%{git_revno}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -139,6 +141,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Mar 25 2014 Pádraig Brady <pbrady@redhat.com> - 2014.1.1-0.4.dev1018
+- Disable swift
+
 * Sat Mar 22 2014 Pádraig Brady <pbrady@redhat.com> - 2014.1.1-0.3.dev1018
 - Fix failure with heat qpid configuration
 
