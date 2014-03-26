@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1018
+%global git_revno 1025
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.4.dev%{git_revno}%{?dist}
+Release:        0.5.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -16,8 +16,7 @@ URL:            https://github.com/stackforge/packstack
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
 Patch0:         qpid-conf.patch
-Patch1:         heat-qpid.patch
-Patch2:         disable-swift.patch
+Patch1:         disable-swift.patch
 
 BuildArch:      noarch
 
@@ -69,7 +68,6 @@ This package contains documentation files for Packstack.
 %setup -n packstack-%{version}dev%{git_revno}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -141,6 +139,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Mar 26 2014 Pádraig Brady <pbrady@redhat.com> - 2014.1.1-0.5.dev1025
+- Ensure ovs_neutron_plugin.ini has correct ownership (rhbz#1080438)
+- Disable provisioning for multihost installations (rhbz#bug1080369)
+- Removed heat-qpid.patch
+
 * Tue Mar 25 2014 Pádraig Brady <pbrady@redhat.com> - 2014.1.1-0.4.dev1018
 - Disable swift
 
