@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1025
+%global git_revno 1032
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.5.dev%{git_revno}%{?dist}
+Release:        0.6.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -139,7 +139,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Wed Mar 26 2014 Pádraig Brady <pbrady@redhat.com> - 2014.1.1-0.5.dev1025
+* Fri Mar 28 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.6.dev1032
+- Explicitly include the firewall module (lp#1297857)
+- Fixed MongoDB manifests (lp#1297984, lp#1297995)
+
+* Wed Mar 26 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.5.dev1025
 - Ensure ovs_neutron_plugin.ini has correct ownership (rhbz#1080438)
 - Disable provisioning for multihost installations (rhbz#bug1080369)
 - Removed heat-qpid.patch
@@ -150,7 +154,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 * Sat Mar 22 2014 Pádraig Brady <pbrady@redhat.com> - 2014.1.1-0.3.dev1018
 - Fix failure with heat qpid configuration
 
-* Fri Mar 22 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.2.dev1018
+* Fri Mar 21 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.2.dev1018
 - Added qpid-conf.patch
 
 * Mon Feb 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.1.dev992
