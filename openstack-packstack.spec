@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1032
+%global git_revno 1033
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.6.dev%{git_revno}%{?dist}
+Release:        0.7.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -139,6 +139,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Mar 31 2014 Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.7.dev1033
+- Mongodb modules want bind_ip to be a list (lp#1297984)
+- Mongodb/ceilmoneter manifests cannot depend on eachother (lp#1297995)
+- Changes the mysql charset to utf8 (rhbz#1080595, rhbz#1080355)
+
 * Fri Mar 28 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.6.dev1032
 - Explicitly include the firewall module (lp#1297857)
 - Fixed MongoDB manifests (lp#1297984, lp#1297995)
