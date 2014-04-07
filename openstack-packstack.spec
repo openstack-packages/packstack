@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1033
+%global git_revno 1045
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.7.dev%{git_revno}%{?dist}
+Release:        0.8.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -15,8 +15,7 @@ URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
-Patch0:         qpid-conf.patch
-Patch1:         disable-swift.patch
+Patch0:         disable-swift.patch
 
 BuildArch:      noarch
 
@@ -67,7 +66,6 @@ This package contains documentation files for Packstack.
 %prep
 %setup -n packstack-%{version}dev%{git_revno}
 %patch0 -p1
-%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -139,9 +137,13 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Apr 7 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.8.dev1045
+- Updated Heat templates (rhbz#1084216)
+- Use mariadb-galera-server for server package
+- Fix QPID config path compatibility (rhbz#1070072)
+- Make RabbitMQ default AMQP provider
+
 * Mon Mar 31 2014 Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.7.dev1033
-- Mongodb modules want bind_ip to be a list (lp#1297984)
-- Mongodb/ceilmoneter manifests cannot depend on eachother (lp#1297995)
 - Changes the mysql charset to utf8 (rhbz#1080595, rhbz#1080355)
 
 * Fri Mar 28 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.6.dev1032
