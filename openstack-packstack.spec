@@ -25,6 +25,7 @@ Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
 Requires:       openstack-puppet-modules >= 2014.2.4-1
+Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
 
