@@ -137,7 +137,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Mon Apr 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.9.dev1055
+* Wed Apr 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.9.dev1055
 - Redirect to https port when SSL enabled (rhbz#1078130)
 - Added puppet resource sequence for cinder backup (rhbz#1075609)
 - Teach packstack about "could not autoload" errors (lp#1312224)
