@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1055
+%global git_revno 1065
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.9.dev%{git_revno}%{?dist}
+Release:        0.10.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -137,6 +137,17 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri May 9 2014 Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.10.dev1065
+- Install o-p-m dependencies on all nodes 
+- [vCenter] Fix the parameters duplicated in answer file (rhbz#1061372, rhbz#1092008)
+- Set correct keystone_default_role for Horizon
+- Better localhost checking for SSL configuration 
+- Add hostname to SSL redirection (rhbz#1078130)
+- Introduce support for mocking command output 
+- [Horizon] Fixed help_url to point to upstream docs (rhbz#1080917)
+- Support ssh-based live migration (lp#1311168)
+- Introduce support for mocking command output 
+
 * Wed Apr 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.9.dev1055
 - Redirect to https port when SSL enabled (rhbz#1078130)
 - Added puppet resource sequence for cinder backup (rhbz#1075609)
