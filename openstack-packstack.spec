@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1065
+%global git_revno 1067
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.10.dev%{git_revno}%{?dist}
+Release:        0.11.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -16,6 +16,7 @@ URL:            https://github.com/stackforge/packstack
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
 Patch0:         disable-swift.patch
+Patch1:         0001-Workaround-for-stoped-openstack-ceilometer-notificat.patch
 
 BuildArch:      noarch
 
@@ -66,6 +67,7 @@ This package contains documentation files for Packstack.
 %prep
 %setup -n packstack-%{version}dev%{git_revno}
 %patch0 -p1
+%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -137,16 +139,21 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon May 12 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.11.dev1067
+- Ensure sshkey title is unique
+- Install ceilometer compute agent on nova-cpu nodes (lp#1318383)
+- Added 0001-Workaround-for-stoped-openstack-ceilometer-notificat.patch
+
 * Fri May 9 2014 Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.10.dev1065
-- Install o-p-m dependencies on all nodes 
+- Install o-p-m dependencies on all nodes
 - [vCenter] Fix the parameters duplicated in answer file (rhbz#1061372, rhbz#1092008)
 - Set correct keystone_default_role for Horizon
-- Better localhost checking for SSL configuration 
+- Better localhost checking for SSL configuration
 - Add hostname to SSL redirection (rhbz#1078130)
-- Introduce support for mocking command output 
+- Introduce support for mocking command output
 - [Horizon] Fixed help_url to point to upstream docs (rhbz#1080917)
 - Support ssh-based live migration (lp#1311168)
-- Introduce support for mocking command output 
+- Introduce support for mocking command output
 
 * Wed Apr 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.9.dev1055
 - Redirect to https port when SSL enabled (rhbz#1078130)
