@@ -1,0 +1,35 @@
+From f3e5fd2db09ff5dc4439fb26c18389d91b525d64 Mon Sep 17 00:00:00 2001
+From: Martin Magr <mmagr@redhat.com>
+Date: Mon, 12 May 2014 15:44:36 +0200
+Subject: [PATCH] Workaround for stoped openstack-ceilometer-notification
+ service
+
+This service has to run to have Ceilometer funtional. This is only
+a workaround quickfix. Module puppet-ceilometer and appropriate
+manifest templates will have to be updated to fix this issue completely.
+
+Change-Id: Iee03c5042d01af00b027b564de70df458852656b
+Fixes: rhbz#1096268
+---
+ packstack/puppet/templates/ceilometer.pp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/packstack/puppet/templates/ceilometer.pp b/packstack/puppet/templates/ceilometer.pp
+index 7bf6766..5b12dbc 100644
+--- a/packstack/puppet/templates/ceilometer.pp
++++ b/packstack/puppet/templates/ceilometer.pp
+@@ -5,6 +5,11 @@ class { 'ceilometer::db':
+ class { 'ceilometer::collector':
+ }
+ 
++service { 'openstack-ceilometer-notification':
++  ensure => 'running',
++  require => Class['ceilometer::collector'],
++}
++
+ class { 'ceilometer::agent::auth':
+     auth_url      => 'http://%(CONFIG_KEYSTONE_HOST)s:35357/v2.0',
+     auth_password => '%(CONFIG_CEILOMETER_KS_PW)s',
+-- 
+1.8.5.3
+
