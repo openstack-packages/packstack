@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1067
+%global git_revno 1068
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.11.dev%{git_revno}%{?dist}
+Release:        0.12.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -139,6 +139,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed May 14 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.12.dev1068
+- Removed unnecessary hacks (rhbz#1096510)
+
 * Mon May 12 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.11.dev1067
 - Ensure sshkey title is unique
 - Install ceilometer compute agent on nova-cpu nodes (lp#1318383)
