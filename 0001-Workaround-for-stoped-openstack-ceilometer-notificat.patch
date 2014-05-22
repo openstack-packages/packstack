@@ -15,7 +15,7 @@ Fixes: rhbz#1096268
  1 file changed, 5 insertions(+)
 
 diff --git a/packstack/puppet/templates/ceilometer.pp b/packstack/puppet/templates/ceilometer.pp
-index 7bf6766..5b12dbc 100644
+index 966b192..abc956c 100644
 --- a/packstack/puppet/templates/ceilometer.pp
 +++ b/packstack/puppet/templates/ceilometer.pp
 @@ -5,6 +5,11 @@ class { 'ceilometer::db':
@@ -28,8 +28,5 @@ index 7bf6766..5b12dbc 100644
 +}
 +
  class { 'ceilometer::agent::auth':
-     auth_url      => 'http://%(CONFIG_KEYSTONE_HOST)s:35357/v2.0',
+     auth_url      => 'http://%(CONFIG_CONTROLLER_HOST)s:35357/v2.0',
      auth_password => '%(CONFIG_CEILOMETER_KS_PW)s',
--- 
-1.8.5.3
-
