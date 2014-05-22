@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1068
+%global git_revno 1083
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.12.dev%{git_revno}%{?dist}
+Release:        0.13.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -15,8 +15,7 @@ URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
 
-Patch0:         disable-swift.patch
-Patch1:         0001-Workaround-for-stoped-openstack-ceilometer-notificat.patch
+Patch0:         0001-Workaround-for-stoped-openstack-ceilometer-notificat.patch
 
 BuildArch:      noarch
 
@@ -67,7 +66,6 @@ This package contains documentation files for Packstack.
 %prep
 %setup -n packstack-%{version}dev%{git_revno}
 %patch0 -p1
-%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -139,6 +137,13 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed May 14 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.13.dev1085
+- [Packstack] Add infos about ML2 params in the packstack man page (rhbz#1065979)
+- [MySQL] Add performance configuration for InnoDB (rhbz#1078999)
+- [Nova] Force qemu-kvm-rhev on RHELs (rhbz#1049861)
+- [Packstack] Plugins refactor (lp#simplification)
+- Removed disable-swift.patch
+
 * Wed May 14 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.12.dev1068
 - Removed unnecessary hacks (rhbz#1096510)
 
