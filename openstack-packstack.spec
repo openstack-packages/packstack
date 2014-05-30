@@ -1,5 +1,5 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1099
+%global git_revno 1100
 
 
 # openstack-packstack ----------------------------------------------------------
@@ -134,8 +134,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Fri May 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.14.dev1099
-- [Packstack] Add Automation for generating the packstack man page
+* Fri May 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.14.dev1100
 - [Packstack] Parameter deprecation support
 - [Firewall] firewalld workaround (rhbz#1099840)
 - [Ceilometer] Install Ceilometer notification agent (rhbz#1096268)
