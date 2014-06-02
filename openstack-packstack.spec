@@ -134,7 +134,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Mon May 02 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.15.dev1102
+* Mon Jun 02 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.15.dev1102
 - [Neutron] Opens GRE and VXLAN port (rhbz#1100993)
 - [Packstack] Fixed Heat plugin (rhbz#1103382)
 
