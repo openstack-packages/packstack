@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1102
+%global git_revno 1109
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.15.dev%{git_revno}%{?dist}
+Release:        0.16.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,11 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Jun 04 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.16.dev1109
+- [Packstack] Fixes language parsing problems
+- [Neutron] Fixed firewall protocols (rhbz#1100993)
+- [Nagios] Fix {nagios,monitoring}-plugins-ping confusion (rhbz#1100037, rhbz#1096154, rhbz#1101665, rhbz#1103695)
+
 * Mon Jun 02 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.15.dev1102
 - [Neutron] Opens GRE and VXLAN port (rhbz#1100993)
 - [Packstack] Fixed Heat plugin (rhbz#1103382)
