@@ -6,7 +6,7 @@
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.16.dev%{git_revno}%{?dist}
+Release:        0.17.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2014.1.1-0.17.dev1109
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Wed Jun 04 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.16.dev1109
 - [Packstack] Fixes language parsing problems
 - [Neutron] Fixed firewall protocols (rhbz#1100993)
