@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1109
+%global git_revno 1129
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.17.dev%{git_revno}%{?dist}
+Release:        0.19.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,20 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Jun 11 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.19.dev1129
+- [Packstack] Add special backward compat layer for Swift plugin
+- [Horizon] Added neutron options for Horizon (rhbz#1103148)
+- [MySQL] Make innodb tweaking compatible with mysql (rhbz#1023221)
+- [Packstack] Synced packstack.rst
+- [Swift] Make sure swift cactch_errors middleware is first in pipeline (rhbz#1023221)
+- [Neutron] Don't use vs_bridge with provider network (rhbz#1105884)
+- [Neutron] Fix firewall rules with multiple network hosts (rhbz#1105248)
+- [Horizon] Refactor horizon ssl setup to use puppet-horizon (rhbz#1104226)
+- [Neutron] Open VXLAN udp port (rhbz#1100993)
+- [Heat] Add Keystone domain for Heat support (rhbz#1076172)
+- [Neutron] Added Neutron FWaaS (rhbz#1098765)
+- [Nagios] updating nagios checks for cinder and glance to list all items not just the admins
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2014.1.1-0.17.dev1109
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
