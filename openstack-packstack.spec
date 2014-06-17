@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1129
+%global git_revno 1149
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.19.dev%{git_revno}%{?dist}
+Release:        0.20.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,17 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Jun 17 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.24.dev1149
+- [Cinder] Moved cinder::volume::iscsi out of main template (rhbz#1106512)
+- [Neutron] Only setup nova notifications if nova is being installed
+- [Heat] Set EC2 auth url for Heat (rhbz#1106394)
+- [Neutron] Handle interface names containing ".", "-" or ":" (rhbz#1105166, rhbz#1057938)
+- [Packstack] Use openstack-selinux on RHEL-7 (rhbz#1109308)
+- [Cinder] Add forgotten cinder backend vmdk (rhbz#1109374)
+- [Nova] Restart libvirtd after Nova Network install (rhbz#1109362)
+- [Firewall] Make sure firewalld is down before iptables starts
+- Removed 0001-Use-openstack-selinux-on-RHEL-7.patch and el7-swift.patch
+
 * Wed Jun 11 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.19.dev1129
 - [Packstack] Add special backward compat layer for Swift plugin
 - [Horizon] Added neutron options for Horizon (rhbz#1103148)
