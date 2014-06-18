@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1149
+%global git_revno 1157
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.20.dev%{git_revno}%{?dist}
+Release:        0.21.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,7 +134,13 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Mon Jun 17 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.24.dev1149
+* Wed Jun 18 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.21.dev1157
+- [Horizon] Fixes horizon error when neutron disabled (rhbz#1110492)
+- [Nova] Fix libvirt livemigration (rhbz#1100356)
+- [SeLinux] Start auditd by default (rhbz#1109250)
+- [Provision] Provision also on multinode setup (rhbz#1100356)
+
+* Tue Jun 17 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.20.dev1149
 - [Cinder] Moved cinder::volume::iscsi out of main template (rhbz#1106512)
 - [Neutron] Only setup nova notifications if nova is being installed
 - [Heat] Set EC2 auth url for Heat (rhbz#1106394)
