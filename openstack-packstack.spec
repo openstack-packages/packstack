@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1157
+%global git_revno 1182
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.21.dev%{git_revno}%{?dist}
+Release:        0.22.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,18 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Jun 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.22.dev1182
+- [Heat] Add CONFIG_CONTROLLER_HOST to heat cfn config (rhbz#1054353)
+- [MySQL] Fix check for CentOS in mysql_install (rhbz#1111318)
+- [Nova] Better Hardware Virt Support checking (rhbz#1111257)
+- [Packstack] prevent packstack from aborting of o-p-m package has no deps (lp#1332705)
+- [Packstack] configure authorized_keys locally for --allinone (rhbz#1111705)
+- [Packstack] Fixed subscription-manager registration (rhbz#1093482)
+- [Neutron] Connect bridge with interface also for GRE and VXLAN (rhbz#1072268)
+- [Neutron] Fixed metering to be installed on each L3 agent (rhbz#1108499)
+- [Neutron] Don't install l2 agent on api node by default (rhbz#1076888)
+- [Tempest] Provision Demo/Tempest Separation (rhbz#1111969)
+
 * Wed Jun 18 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.21.dev1157
 - [Horizon] Fixes horizon error when neutron disabled (rhbz#1110492)
 - [Nova] Fix libvirt livemigration (rhbz#1100356)
