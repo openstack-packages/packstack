@@ -1,5 +1,5 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1182
+%global git_revno 1184
 
 
 # openstack-packstack ----------------------------------------------------------
@@ -134,10 +134,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Tue Jun 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.22.dev1182
+* Tue Jun 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.22.dev1184
 - [Heat] Add CONFIG_CONTROLLER_HOST to heat cfn config (rhbz#1054353)
 - [MySQL] Fix check for CentOS in mysql_install (rhbz#1111318)
-- [Nova] Better Hardware Virt Support checking (rhbz#1111257)
 - [Packstack] prevent packstack from aborting of o-p-m package has no deps (lp#1332705)
 - [Packstack] configure authorized_keys locally for --allinone (rhbz#1111705)
 - [Packstack] Fixed subscription-manager registration (rhbz#1093482)
