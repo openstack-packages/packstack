@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1184
+%global git_revno 1194
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.22.dev%{git_revno}%{?dist}
+Release:        0.23.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,13 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Jun 25 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.23.dev1194
+- [Neutron] Fixes DHCP firewall protocol (rhbz#1112019)
+- [Neutron] Setup neutron l2 plugin configs only on neutron api nodes (rhbz#1113472)
+- [Neutron] Connect bridge with interface only on network hosts (rhbz#1072268)
+- [Neutron] Enables Debugging Mode for Neutron Agents (rhbz#1090785)
+- [Swift] Add crossdomain middleware into switf proxy pipeline
+
 * Tue Jun 24 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.22.dev1184
 - [Heat] Add CONFIG_CONTROLLER_HOST to heat cfn config (rhbz#1054353)
 - [MySQL] Fix check for CentOS in mysql_install (rhbz#1111318)
