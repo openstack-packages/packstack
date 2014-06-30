@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1194
+%global git_revno 1196
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.23.dev%{git_revno}%{?dist}
+Release:        0.24.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Jun 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.24.dev1196
+- [Swift] Change Swift proxy pipeline quota entries to use underscore instead of dash (rhbz#1114262)
+
 * Wed Jun 25 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.23.dev1194
 - [Neutron] Fixes DHCP firewall protocol (rhbz#1112019)
 - [Neutron] Setup neutron l2 plugin configs only on neutron api nodes (rhbz#1113472)
