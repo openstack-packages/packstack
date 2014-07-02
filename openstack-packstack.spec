@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1196
+%global git_revno 1208
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.24.dev%{git_revno}%{?dist}
+Release:        0.25.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,15 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Jul 02 2014  Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.25.dev1208
+- [Nova] Change nova api steps generating puppet manifests to fix neutron (rhbz#1115458)
+- [Provision] Make sure bridge provision is disabled for Nova network (rhbz#1115444)
+- [Nova] Restart libvirt only when deploying nova network on compute (rhbz#1114930)
+- [Packstack] Compare CONFIG_PROVISION_ALL_IN_ONE_OVS_BRIDGE to 'false' (rhbz#1115163)
+- [Packstack] Stop firewalld before service iptables and not class firewall (rhbz#1114121)
+- [Packstack] Prevents packstack to create user/tenant called undef (rhbz#1114590)
+- [Neutron] Fixed lbaas to be installed on network nodes (rhbz#1114261)
+
 * Mon Jun 30 2014 Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.24.dev1196
 - [Swift] Change Swift proxy pipeline quota entries to use underscore instead of dash (rhbz#1114262)
 
