@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1208
+%global git_revno 1220
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.25.dev%{git_revno}%{?dist}
+Release:        0.26.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,19 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Jul 15 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.26.dev1220
+- [Neutron] Don't use ML2 parameters for other plugins (rhbz#1119473)
+- [Neutron] Fixes Duplicated variables in neutron manifests
+- [Tempest] Fixes incomplete Tempest question in interactive mode (rhbz#1116431)
+- [Packstack] Fixes Facts string comparisons in CentOS 7 (rhbz#1117035)
+- [Neutron] Sets l2population to true on nodes that populate l2 agents (rhbz#1118010)
+- [Ceilometer] Ensure ceilometer depends on nova-common package
+- Remove rhel7-qpid-018.patch becaue it does not apply anymore
+- Add 0001-Make-amqp.pp-compatible-with-RHOS-version-of-qpidd.patch as substitute of
+  rhel7-qpid-018.patch
+- [Ceilometer] Ensure ceilometer depends on nova common package (rhbz#1115946)
+- [Nova] Fixes libvirtd restart (rhbz#1109362)
+
 * Wed Jul 02 2014  Martin Mágr <mmagr@redhat.com> - 2014.1.1-0.25.dev1208
 - [Nova] Change nova api steps generating puppet manifests to fix neutron (rhbz#1115458)
 - [Provision] Make sure bridge provision is disabled for Nova network (rhbz#1115444)
