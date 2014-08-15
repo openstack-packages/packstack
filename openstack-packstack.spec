@@ -134,7 +134,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Thu Aug 15 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.27.dev1238
+* Fri Aug 15 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.27.dev1238
 - [Nova] Added FW rules for live migration (rhbz#1117524)
 - [Nova] Add live migration support and firewall rules (rhbz#1122457, rhbz#1122703, rhbz#1117524)
 - [Horizon] Remove ServerAlias definitions (rhbz#1119920)
