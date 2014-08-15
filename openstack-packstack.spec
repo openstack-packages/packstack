@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1220
+%global git_revno 1238
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.26.dev%{git_revno}%{?dist}
+Release:        0.27.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -134,6 +134,20 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Aug 15 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.27.dev1238
+- [Nova] Added FW rules for live migration (rhbz#1117524)
+- [Nova] Add live migration support and firewall rules (rhbz#1122457, rhbz#1122703, rhbz#1117524)
+- [Horizon] Remove ServerAlias definitions (rhbz#1119920)
+- [Mysql] Fixed remote DB installations (rhbz#1128212)
+- [Packstack] Ensures RHOS SOS Plugins is installed on all nodes (rhbz#1053734)
+- [Packstack] Reload sysctl (rhbz#1104619)
+- [Packstack] Adds Warning when NetworkManager is active on hosts (rhbz#1117115)
+- [Amqp] Adds Scientific Linux 7 Support.
+- [Nova] Enable migration support in libvirt
+- [Heat] Configures Heat to use Trusts by default
+- [Packstack] Adds Better rst Output when using 'packstack -o'
+- [Heat] Adds Undocumented HEAT Options
+
 * Tue Jul 15 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.26.dev1220
 - [Neutron] Don't use ML2 parameters for other plugins (rhbz#1119473)
 - [Neutron] Fixes Duplicated variables in neutron manifests
