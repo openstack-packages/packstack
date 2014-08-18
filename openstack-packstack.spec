@@ -6,7 +6,7 @@
 
 Name:           openstack-packstack
 Version:        2014.1.1
-Release:        0.27.dev%{git_revno}%{?dist}
+Release:        0.28.dev%{git_revno}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -64,7 +64,7 @@ This package contains documentation files for Packstack.
 %prep
 %setup -n packstack-%{version}dev%{git_revno}
 
-# Sanitizing a lot of the files in the puppet modules, they come from seperate upstream projects
+# Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
 find packstack/puppet/modules \( -name "*.py" -o -name "*.rb" -o -name "*.pl" \) -exec sed -i '/^#!/{d;q}' {} + -exec chmod -x {} +
 find packstack/puppet/modules \( -name "*.sh" \) -exec sed -i 's/^#!.*/#!\/bin\/bash/g' {} + -exec chmod +x {} +
@@ -102,6 +102,7 @@ rm -fr %{buildroot}%{python_sitelib}/tests
 # Install Puppet module
 mkdir -p %{buildroot}/%{_datadir}/openstack-puppet/modules
 cp -r %{_builddir}/puppet/modules/packstack  %{buildroot}/%{_datadir}/openstack-puppet/modules/
+cp -r %{_builddir}/puppet/modules/remote  %{buildroot}/%{_datadir}/openstack-puppet/modules/
 
 # Move Puppet manifest templates back to original place
 mkdir -p %{buildroot}/%{python_sitelib}/packstack/puppet
@@ -124,6 +125,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %files puppet
 %defattr(644,root,root,755)
 %{_datadir}/openstack-puppet/modules/packstack
+%{_datadir}/openstack-puppet/modules/remote
 
 %if 0%{?with_doc}
 %files doc
@@ -134,6 +136,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Aug 18 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.28.dev1238
+- Fixed installation of puppet-remote module (rhbz#1128212)
+
 * Fri Aug 15 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.27.dev1238
 - [Nova] Added FW rules for live migration (rhbz#1117524)
 - [Nova] Add live migration support and firewall rules (rhbz#1122457, rhbz#1122703, rhbz#1117524)
