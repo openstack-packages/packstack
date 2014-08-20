@@ -62,7 +62,7 @@ This package contains documentation files for Packstack.
 # prep -------------------------------------------------------------------------
 
 %prep
-%setup -n packstack-%{version}dev%{git_revno}
+%setup -n packstack-%{upstream_version}
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
