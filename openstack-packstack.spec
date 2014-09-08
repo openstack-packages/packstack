@@ -1,19 +1,20 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1238
+%global git_snaptag 1266
+%global git_commit g63d9c50
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2014.1.1
-Release:        0.28.dev%{git_revno}%{?dist}
+Version:        2014.2
+Release:        0.1.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
 BuildArch:      noarch
 
@@ -62,7 +63,8 @@ This package contains documentation files for Packstack.
 # prep -------------------------------------------------------------------------
 
 %prep
-%setup -n packstack-%{version}dev%{git_revno}
+#%setup -n packstack-%{version}dev%{git_revno}
+%setup -n packstack-%{version}.dev%{git_snaptag}.%{git_commit}
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -136,6 +138,20 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Sep 8 2014  Iván Chavero <ichavero@redhat.com> - 2014.2-0.1.dev1266
+- [Packstack] Links to get-involved type resources
+- [Puppet] Call rpm --whatprovides on packages required to run puppet.
+- [Puppet] Add dependant openstacklib to list of puppet modules.
+- [Packstack] Unsupported option (rhbz#1131866).
+- [Packstack] Improved versioning.
+- [Mysql] Make packstack compatible with latest puppetlabs-mysql module (rhbz#1129760).
+- [Cinder] Enables config of NetApp's Cinder driver.
+- [Provision] Correct value of $public_bridge_name.
+- [Packstack] Install and update packages required by packstack (rhbz#1132408).
+- [Packstack] RHSM HTTP proxy (rhbz#1123875).
+- [Neutron] Add ignore unknown variables errors switch (rhbz#1132129).
+- [Firewall] Removed iptables rules duplication.
+
 * Mon Aug 18 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.28.dev1238
 - Fixed installation of puppet-remote module (rhbz#1128212)
 
