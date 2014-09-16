@@ -7,7 +7,7 @@
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.1.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.2.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -25,6 +25,7 @@ Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
 Requires:       openstack-puppet-modules
+Requires:       python-setuptools
 
 %description
 Packstack is a utility that uses Puppet modules to install OpenStack. Packstack
@@ -138,6 +139,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Sep 16 2014  Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.2.dev1266
+- Add missing runtime require on python-setuptools.
+
 * Mon Sep 8 2014  Iván Chavero <ichavero@redhat.com> - 2014.2-0.1.dev1266
 - [Packstack] Links to get-involved type resources
 - [Puppet] Call rpm --whatprovides on packages required to run puppet.
