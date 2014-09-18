@@ -16,6 +16,8 @@ URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
+Patch0:         enable-epel.patch
+
 BuildArch:      noarch
 
 BuildRequires:  python2-devel
@@ -66,6 +68,9 @@ This package contains documentation files for Packstack.
 %prep
 #%setup -n packstack-%{version}dev%{git_revno}
 %setup -n packstack-%{version}.dev%{git_snaptag}.%{git_commit}
+%if 0%{?rhel}
+%patch0 -p1
+%endif
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
