@@ -7,7 +7,7 @@
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.2.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.3.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -144,6 +144,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Sep 18 2014  Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.3.dev1266
+- Add enable-epel.patch only applied for rhel.
+
 * Tue Sep 16 2014  Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.2.dev1266
 - Add missing runtime require on python-setuptools.
 
