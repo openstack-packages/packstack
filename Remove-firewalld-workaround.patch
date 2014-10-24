@@ -1,0 +1,33 @@
+From 540fefe08b0a8bb9ad142705cf058947e22124ec Mon Sep 17 00:00:00 2001
+From: Lukas Bezdicka <lbezdick@redhat.com>
+Date: Fri, 24 Oct 2014 16:28:53 +0200
+Subject: [PATCH] Remove firewalld workaround as it should be part of
+ puppet-firewall now
+
+Change-Id: Idbf62b7433d2f3587562c5a3556fd765aaa04aef
+---
+ packstack/puppet/templates/prescript.pp | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/packstack/puppet/templates/prescript.pp b/packstack/puppet/templates/prescript.pp
+index b75874e..d6d37dd 100644
+--- a/packstack/puppet/templates/prescript.pp
++++ b/packstack/puppet/templates/prescript.pp
+@@ -19,14 +19,6 @@ if $::operatingsystem in $el_releases and $::operatingsystemmajrelease < 7 {
+   }
+ }
+ 
+-# Stop firewalld since everything uses iptables. Firewalld provider will
+-# have to be implemented in puppetlabs-firewall in future.
+-service { "firewalld":
+-  ensure => "stopped",
+-  enable => false,
+-  before => Service['iptables'],
+-}
+-
+ package { 'audit':
+   ensure => present,
+ } ->
+-- 
+1.9.3
+

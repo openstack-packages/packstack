@@ -7,7 +7,7 @@
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.3.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.4.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,6 +17,7 @@ URL:            https://github.com/stackforge/packstack
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
 Patch0:         enable-epel.patch
+Patch1:         Remove-firewalld-workaround.patch
 
 BuildArch:      noarch
 
@@ -26,7 +27,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules
+Requires:       openstack-puppet-modules >= 2014.2.1-0.5
 Requires:       python-setuptools
 
 %description
@@ -71,6 +72,7 @@ This package contains documentation files for Packstack.
 %if 0%{?rhel}
 %patch0 -p1
 %endif
+%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -144,6 +146,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Oct 24 2014 Alan Pevec <apevec@redhat.com> - 2014.2-0.4.dev1266
+- Remove firewalld workaround.
+
 * Thu Sep 18 2014  Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.3.dev1266
 - Add enable-epel.patch only applied for rhel.
 
