@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1266
-%global git_commit g63d9c50
+%global git_snaptag 1316
+%global git_commit g733aa73
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.4.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.5.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,7 +17,6 @@ URL:            https://github.com/stackforge/packstack
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
 Patch0:         enable-epel.patch
-Patch1:         Remove-firewalld-workaround.patch
 
 BuildArch:      noarch
 
@@ -72,7 +71,7 @@ This package contains documentation files for Packstack.
 %if 0%{?rhel}
 %patch0 -p1
 %endif
-%patch1 -p1
+
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -146,6 +145,32 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Oct 29 2014 Martin Mágr <mmagr@redhat.com> - 2014.2.0.5.dev1316
+- [MariaDB] Deprecates MySQL parameters in favor of MariaDB (rhbz#1102486)
+- [Cinder] Refactor cinder plugin and extend it with multiple backends support (rhbz#1139246)
+- [Neutron] Applies packstack::neutron::bridge class to network hosts (rhbz#1133968)
+- [Cinder] Adds missing validator (rhbz#1128303)
+- [Neutron] Adds usage examples for CONFIG_NEUTRON_L2_PLUGIN (rhbz#1066019)
+- [Packstack] Fix Warning when NetworkManager is active on hosts (rhbz#1130589, rhbz#1117115)
+- [Packstack] Allow specifying of a global --password option (rhbz#1108742)
+- [Keystone] Use a valid e-mail for admin user in keystone (rhbz#1020199)
+- [Keystone] Add CONFIG_KEYSTONE_REGION option
+- [Packstack] Fix NetworkManager facter error (rhbz#1116403)
+- [MariaDB] Remove mariadb-server package during installation (rhbz#1148578)
+- [MariaDB] Fixed remote MariaDB installations (rhbz#1150348)
+- [Neutron] Load bridge module (rhbz#1123465)
+- [Horizon] Set up NOVNC with https when using SSL on HORIZON (rhbz#1115896)
+- [Glance] Implement Swift storage backend for Glance
+- [Keystone] Use UUID as default Keystone token format (lp#1382160)
+- [Keystone] Support other components using apache mod_wsgi (lp#1348732)
+- [Cinder] Fixes the duplicate creation of service/endpoint for cinder v2 (rhbz#1153354)
+- [Packstack] Configure chronyd for RHEL 7/CentOS 7/Fedora
+- [Packstack] Generate answer file only when needed
+- [Packstack] Remove firewalld workaround as it should be part of puppet-firewall now
+- [Neutron] Fix Neutron FWaaS configuration
+- [Packstack] Always enable EPEL repo when installing RDO
+- [Packstack] Check for puppet execution errors (rhbz#1153296)
+
 * Fri Oct 24 2014 Alan Pevec <apevec@redhat.com> - 2014.2-0.4.dev1266
 - Remove firewalld workaround.
 
