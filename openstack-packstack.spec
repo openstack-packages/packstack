@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1316
-%global git_commit g733aa73
+%global git_snaptag 1331
+%global git_commit g34ecfce
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.5.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.6.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -28,6 +28,7 @@ Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
 Requires:       openstack-puppet-modules >= 2014.2.1-0.5
 Requires:       python-setuptools
+Requires:       PyYAML
 
 %description
 Packstack is a utility that uses Puppet modules to install OpenStack. Packstack
@@ -145,6 +146,16 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Oct 31 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2.0.5.dev1331
+- [Packstack] Add docs environment to tox.ini
+- [Swift] Fixes the swift loopback device creation for test setup. (rhbz#1141125)
+- [Packstack] Revert "Adds Warning when NetworkManager is active on hosts" (rhbz#1117277)
+- [Packstack] Adds Hiera implementation within Packstack (rhbz#1145223)
+- [Packstack] Instructions for development setup
+- [Cinder] Fix LVM Cinder Volume Creation (rhbz#1148552)
+- [Packstack] Allow --default-password with --gen-answer-file
+- [Packstack] Fix several deprecation warnings
+
 * Wed Oct 29 2014 Martin Mágr <mmagr@redhat.com> - 2014.2.0.5.dev1316
 - [MariaDB] Deprecates MySQL parameters in favor of MariaDB (rhbz#1102486)
 - [Cinder] Refactor cinder plugin and extend it with multiple backends support (rhbz#1139246)
