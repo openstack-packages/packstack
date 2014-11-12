@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1331
-%global git_commit g34ecfce
+%global git_snaptag 1340
+%global git_commit d4df05a
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.6.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.7.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -15,8 +15,6 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
-
-Patch0:         enable-epel.patch
 
 BuildArch:      noarch
 
@@ -26,7 +24,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules >= 2014.2.1-0.5
+Requires:       openstack-puppet-modules >= 2014.2.4-1
 Requires:       python-setuptools
 Requires:       PyYAML
 
@@ -69,9 +67,6 @@ This package contains documentation files for Packstack.
 %prep
 #%setup -n packstack-%{version}dev%{git_revno}
 %setup -n packstack-%{version}.dev%{git_snaptag}.%{git_commit}
-%if 0%{?rhel}
-%patch0 -p1
-%endif
 
 
 # Sanitizing a lot of the files in the puppet modules
@@ -146,7 +141,16 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Fri Oct 31 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2.0.5.dev1331
+* Wed Nov 12 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.7.dev1340
+- remove enable-epel.patch patch
+- [Nova] Fix virbr0 elimination on compute nodes
+- [Glance] Allow alternate locations for Cirros image (rhbz#1147716)
+- [Swift] Fix swift loopback creation
+- [Neutron] Set MTU=1400 for GRE and VXLAN tenant networks
+- [Heat] Revert "Configures Heat to use Trusts by default" - moved to puppet-heat
+- [Heat] Ensure Heat is set up before running provisioning
+
+* Fri Oct 31 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.6.dev1331
 - [Packstack] Add docs environment to tox.ini
 - [Swift] Fixes the swift loopback device creation for test setup. (rhbz#1141125)
 - [Packstack] Revert "Adds Warning when NetworkManager is active on hosts" (rhbz#1117277)
@@ -156,7 +160,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 - [Packstack] Allow --default-password with --gen-answer-file
 - [Packstack] Fix several deprecation warnings
 
-* Wed Oct 29 2014 Martin Mágr <mmagr@redhat.com> - 2014.2.0.5.dev1316
+* Wed Oct 29 2014 Martin Mágr <mmagr@redhat.com> - 2014.2-0.5.dev1316
 - [MariaDB] Deprecates MySQL parameters in favor of MariaDB (rhbz#1102486)
 - [Cinder] Refactor cinder plugin and extend it with multiple backends support (rhbz#1139246)
 - [Neutron] Applies packstack::neutron::bridge class to network hosts (rhbz#1133968)
