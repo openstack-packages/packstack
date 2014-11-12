@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %global git_snaptag 1340
-%global git_commit d4df05a
+%global git_commit gd4df05a
 
 
 # openstack-packstack ----------------------------------------------------------
