@@ -1,19 +1,20 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_revno 1238
+%global git_snaptag 1340
+%global git_commit gd4df05a
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2014.1.1
-Release:        0.28.dev%{git_revno}%{?dist}
+Version:        XXX
+Release:        XXX{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}dev%{git_revno}.tar.gz
+Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
 BuildArch:      noarch
 
@@ -24,6 +25,9 @@ Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
 Requires:       openstack-puppet-modules
+Obsoletes:      packstack-modules-puppet
+Requires:       python-setuptools
+Requires:       PyYAML
 
 %description
 Packstack is a utility that uses Puppet modules to install OpenStack. Packstack
@@ -120,7 +124,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %doc LICENSE
 %{_bindir}/packstack
 %{python_sitelib}/packstack
-%{python_sitelib}/packstack-%{version}*.egg-info
+%{python_sitelib}/packstack-*.egg-info
 
 %files puppet
 %defattr(644,root,root,755)
@@ -136,6 +140,74 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Nov 12 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.7.dev1340
+- remove enable-epel.patch patch
+- [Nova] Fix virbr0 elimination on compute nodes
+- [Glance] Allow alternate locations for Cirros image (rhbz#1147716)
+- [Swift] Fix swift loopback creation
+- [Neutron] Set MTU=1400 for GRE and VXLAN tenant networks
+- [Heat] Revert "Configures Heat to use Trusts by default" - moved to puppet-heat
+- [Heat] Ensure Heat is set up before running provisioning
+
+* Fri Oct 31 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.6.dev1331
+- [Packstack] Add docs environment to tox.ini
+- [Swift] Fixes the swift loopback device creation for test setup. (rhbz#1141125)
+- [Packstack] Revert "Adds Warning when NetworkManager is active on hosts" (rhbz#1117277)
+- [Packstack] Adds Hiera implementation within Packstack (rhbz#1145223)
+- [Packstack] Instructions for development setup
+- [Cinder] Fix LVM Cinder Volume Creation (rhbz#1148552)
+- [Packstack] Allow --default-password with --gen-answer-file
+- [Packstack] Fix several deprecation warnings
+
+* Wed Oct 29 2014 Martin Mágr <mmagr@redhat.com> - 2014.2-0.5.dev1316
+- [MariaDB] Deprecates MySQL parameters in favor of MariaDB (rhbz#1102486)
+- [Cinder] Refactor cinder plugin and extend it with multiple backends support (rhbz#1139246)
+- [Neutron] Applies packstack::neutron::bridge class to network hosts (rhbz#1133968)
+- [Cinder] Adds missing validator (rhbz#1128303)
+- [Neutron] Adds usage examples for CONFIG_NEUTRON_L2_PLUGIN (rhbz#1066019)
+- [Packstack] Fix Warning when NetworkManager is active on hosts (rhbz#1130589, rhbz#1117115)
+- [Packstack] Allow specifying of a global --password option (rhbz#1108742)
+- [Keystone] Use a valid e-mail for admin user in keystone (rhbz#1020199)
+- [Keystone] Add CONFIG_KEYSTONE_REGION option
+- [Packstack] Fix NetworkManager facter error (rhbz#1116403)
+- [MariaDB] Remove mariadb-server package during installation (rhbz#1148578)
+- [MariaDB] Fixed remote MariaDB installations (rhbz#1150348)
+- [Neutron] Load bridge module (rhbz#1123465)
+- [Horizon] Set up NOVNC with https when using SSL on HORIZON (rhbz#1115896)
+- [Glance] Implement Swift storage backend for Glance
+- [Keystone] Use UUID as default Keystone token format (lp#1382160)
+- [Keystone] Support other components using apache mod_wsgi (lp#1348732)
+- [Cinder] Fixes the duplicate creation of service/endpoint for cinder v2 (rhbz#1153354)
+- [Packstack] Configure chronyd for RHEL 7/CentOS 7/Fedora
+- [Packstack] Generate answer file only when needed
+- [Packstack] Remove firewalld workaround as it should be part of puppet-firewall now
+- [Neutron] Fix Neutron FWaaS configuration
+- [Packstack] Always enable EPEL repo when installing RDO
+- [Packstack] Check for puppet execution errors (rhbz#1153296)
+
+* Fri Oct 24 2014 Alan Pevec <apevec@redhat.com> - 2014.2-0.4.dev1266
+- Remove firewalld workaround.
+
+* Thu Sep 18 2014  Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.3.dev1266
+- Add enable-epel.patch only applied for rhel.
+
+* Tue Sep 16 2014  Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.2.dev1266
+- Add missing runtime require on python-setuptools.
+
+* Mon Sep 8 2014  Iván Chavero <ichavero@redhat.com> - 2014.2-0.1.dev1266
+- [Packstack] Links to get-involved type resources
+- [Puppet] Call rpm --whatprovides on packages required to run puppet.
+- [Puppet] Add dependant openstacklib to list of puppet modules.
+- [Packstack] Unsupported option (rhbz#1131866).
+- [Packstack] Improved versioning.
+- [Mysql] Make packstack compatible with latest puppetlabs-mysql module (rhbz#1129760).
+- [Cinder] Enables config of NetApp's Cinder driver.
+- [Provision] Correct value of $public_bridge_name.
+- [Packstack] Install and update packages required by packstack (rhbz#1132408).
+- [Packstack] RHSM HTTP proxy (rhbz#1123875).
+- [Neutron] Add ignore unknown variables errors switch (rhbz#1132129).
+- [Firewall] Removed iptables rules duplication.
+
 * Mon Aug 18 2014  Iván Chavero <ichavero@redhat.com> - 2014.1.1-0.28.dev1238
 - Fixed installation of puppet-remote module (rhbz#1128212)
 
