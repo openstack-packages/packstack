@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1340
-%global git_commit gd4df05a
+%global git_snaptag 1350
+%global git_commit g46661a7
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.7.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.8.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -24,7 +24,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules >= 2014.2.4-1
+Requires:       openstack-puppet-modules >= 2014.2.5-1
 Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
@@ -142,6 +142,15 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Nov 25 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.8.dev1350
+- [Packstack] Switch README file to Markdown
+- [Packstack] Introduce Puppet-lint/syntax test into Packstack
+- [Packstack] Add workaround for PuppetLint.configuration.ignore_paths
+- [Packstack] Remove Deprecated parameters for keystone::endpoint class
+- [Horizon] Do not override defaults in local_settings (rhbz#1148770)
+- [Neutron] Fix undef hiera value for gre protocol
+- [Packstack] Adds Warning when NetworkManager is active on hosts (rhbz#1117115)
+
 * Wed Nov 12 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.7.dev1340
 - remove enable-epel.patch patch
 - [Nova] Fix virbr0 elimination on compute nodes
