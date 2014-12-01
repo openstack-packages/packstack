@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1350
-%global git_commit g46661a7
+%global git_snaptag 1359
+%global git_commit g40f3b9d
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.8.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.9.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -142,6 +142,14 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Dec 01 2014 Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.9.dev1359
+- [Neutron] Ensure ovs agent setup runs for all CONFIG_NEUTRON_ML2_TENANT_NETWORK_TYPES (rhbz#1163697, rhbz#1168242)
+- [Neutron] Deprecate ovs and linuxbridge plugins
+- [Packstack] Check packstack/version.py for PEP8 issues
+- [Cinder] Do not create cinder-volumes if not needed
+- [Cinder] Avoid KeyError: 'CONFIG_CINDER_VOLUMES_SIZE' error (rhbz#1164359)
+- [Packstack] Switch juno openstack patches branch to f22-patches
+
 * Tue Nov 25 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.8.dev1350
 - [Packstack] Switch README file to Markdown
 - [Packstack] Introduce Puppet-lint/syntax test into Packstack
