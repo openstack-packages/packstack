@@ -7,14 +7,14 @@
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.9.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.10.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
+Source0:        https://github.com/stackforge/packstack/archive/%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
 BuildArch:      noarch
 
@@ -142,6 +142,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Dec 02 2014 Gaël Chamoulaud <gchamoul@redhat.com> - 2014.2-0.10.dev1359
+- Fix source url. Now using release tag from github.
+
 * Mon Dec 01 2014 Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.9.dev1359
 - [Neutron] Ensure ovs agent setup runs for all CONFIG_NEUTRON_ML2_TENANT_NETWORK_TYPES (rhbz#1163697, rhbz#1168242)
 - [Neutron] Deprecate ovs and linuxbridge plugins
