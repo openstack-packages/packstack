@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1359
-%global git_commit g40f3b9d
+%global git_snaptag 1368
+%global git_commit g965a8d1
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.10.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.11.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -24,7 +24,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules >= 2014.2.5-1
+Requires:       openstack-puppet-modules >= 2014.2.7-1
 Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
@@ -142,6 +142,14 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Dec 11 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.11.dev1368
+- [Ceilometer] redis-based group membership coordination for ceilometer
+- [Tempest] Fix Tempest Provisioning
+- [Packstack] Use '.pp' as default ending for template files
+- [Neutron] Open VXLAN port only to NETWORK_HOSTS (rhbz#1144816)
+- [Rabbitmq] Configure TCP keepalive setting to all nodes (rhbz#1167414)
+- [Packstack] Packstack Plugins Clean-up
+
 * Tue Dec 02 2014 Gaël Chamoulaud <gchamoul@redhat.com> - 2014.2-0.10.dev1359
 - Fix source url. Now using release tag from github.
 
