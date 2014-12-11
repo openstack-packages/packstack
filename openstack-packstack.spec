@@ -14,7 +14,7 @@ Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
-Source0:        https://github.com/stackforge/packstack/archive/%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
+Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{version}.dev%{git_snaptag}.%{git_commit}.tar.gz
 
 BuildArch:      noarch
 
@@ -143,6 +143,7 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 
 %changelog
 * Thu Dec 11 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.11.dev1368
+- Revert "Fix source url. Now using release tag from github."
 - [Ceilometer] redis-based group membership coordination for ceilometer
 - [Tempest] Fix Tempest Provisioning
 - [Packstack] Use '.pp' as default ending for template files
