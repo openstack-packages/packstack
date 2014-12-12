@@ -1,13 +1,13 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1368
-%global git_commit g965a8d1
+%global git_snaptag 1370
+%global git_commit ge46bee1
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.11.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.12.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -24,7 +24,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules >= 2014.2.7-1
+Requires:       openstack-puppet-modules >= 2014.2.7-2
 Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
@@ -142,6 +142,9 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Dec 12 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.12.dev1370
+- [Neutron] Fix issues if ML2 neutron is configured with linuxbridge (LP#1399733)
+
 * Thu Dec 11 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.11.dev1368
 - Revert "Fix source url. Now using release tag from github."
 - [Ceilometer] redis-based group membership coordination for ceilometer
