@@ -1,13 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1370
-%global git_commit ge46bee1
-
+%global git_snaptag 1395
+%global git_commit gaabe0a2
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.12.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.13.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -24,7 +23,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules >= 2014.2.7-2
+Requires:       openstack-puppet-modules >= 2014.2.8-1
 Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
@@ -142,6 +141,22 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Dec 19 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.13.dev1395
+- [Prescript] Ensure yum-utils is installed on nodes before running yum-config (rhbz#1093828)
+- [Apache] The httpd service should only be installed on the controller node
+- [Packstack] Fix spelling of OpenStack
+- [Packstack] Remove Puppet templates endings when calling getManifestTemplate
+- [Packstack] Change the APP_NAME to Packstack
+- [Packstack] Update to Fedora 21 and remove Fedora 19 support
+- [Nova] [Neutron] network: set the default floating ip pool name (rhbz#1356462)
+- [Packstack] Print the used logfile also at the beginning
+- [Sahara] Sahara support to Packstack in time for Juno
+- [Rabbitmq] allow non-localhost connections to 'guest' user (rhbz#1175428)
+- [Provision] Don't provision glance images if Glance wasn't installed (rhbz#1175726)
+- [Neutron] Load br_netfilter module on Fedora 22+ (rhbz#1175460)
+- [Trove] Trove Support
+- [Ironic] Ironic support for packstack
+
 * Fri Dec 12 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.12.dev1370
 - [Neutron] Fix issues if ML2 neutron is configured with linuxbridge (LP#1399733)
 
