@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1395
-%global git_commit gaabe0a2
+%global git_snaptag 1401
+%global git_commit gdd19d48
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.13.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.14.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -141,6 +141,12 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Jan 9 2015 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.14.dev1401
+- [Packstack] Fix deprecations
+- [Packstack] Use is_virtual instead of is_virtual_packstack
+- [Packstack] Set default branch
+- [Nova] Set correct vncserver_proxyclient_address (rhbz#1172241)
+
 * Fri Dec 19 2014 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.13.dev1395
 - [Prescript] Ensure yum-utils is installed on nodes before running yum-config (rhbz#1093828)
 - [Apache] The httpd service should only be installed on the controller node
