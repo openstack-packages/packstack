@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1401
-%global git_commit gdd19d48
+%global git_snaptag 1446
+%global git_commit gc669c34
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Version:        2014.2
-Release:        0.14.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.15.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -23,7 +23,7 @@ BuildRequires:  python-setuptools
 Requires:       openssh-clients
 Requires:       python-netaddr
 Requires:       openstack-packstack-puppet == %{version}-%{release}
-Requires:       openstack-puppet-modules >= 2014.2.8-1
+Requires:       openstack-puppet-modules >= 2014.2.10
 Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
@@ -141,6 +141,37 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Feb 11 2015 Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.15.dev1446
+- [AMQP] Remove QPID ssl package installation
+- [Packstack] Bulletproof novncproxy setting
+- [Ironic] Add missing usage imformation for CONFIG_IRONIC_DB_PW
+- [Packstack] Don't always delete temporary directories
+- [Sahara] Fix: Correctly set the use_neutron option
+- [Packstack] Use flake8 and hacking instead of pep8 for Python syntax checks
+- [Packstack] Enable PEP8 checks for E211, E222, E225, E228
+- [Packstack] Enable PEP8 checks for E121, E129, E231, E265, E302
+- [Packstack] Enable PEP8 checks for F401, E202, E271, E272, E711, E712
+- [Packstack] Enable PEP8 checks for E111, E241, E261, E401, E502, E713, E721
+- [Packstack] Standardize DB Product Name
+- [Apache] Fix concat::setup deprecation warning
+- [Keystone] Fix keystone::endpoint deprecation
+- [Neutron] start using bridge_uplinks for ovs agent
+- [Keystone] Fix deprecation of cinder parameter in Nova::Keystone::Auth
+- [Apache] Revert Fix concat::setup deprecation warning
+- [Horizon] Switch deprecated can_set_mount_point to hypervisor_options
+- [Horizon] switch from fqdn option to allowed_hosts and server_aliases
+- load br_netfilter module if necessary
+- Add Openstack unified client
+- Install rhos-log-collector only on RHEL systems
+- [AMQP] cherrypick ssl fixes from freeipa patches
+- [Keystone] Fix keystone url
+- [Heat] Add a note to use 16, 24, or 32 chars for CONFIG_HEAT_AUTH_ENC_KEY
+- [Cinder] Add vmdk to cinder usage option.
+- [Packstack] IPv6 fixes
+- [Provision] Get rid of puppet-openstack dependency
+- [Packstack] Unified validators
+- [Heat] Fix missing heat_stack_owner role
+
 * Fri Jan 9 2015 Lukas Bezdicka <lbezdick@redhat.com> - 2014.2-0.14.dev1401
 - [Packstack] Fix deprecations
 - [Packstack] Use is_virtual instead of is_virtual_packstack
