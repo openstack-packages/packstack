@@ -1,12 +1,12 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1446
-%global git_commit gc669c34
+%global git_snaptag 1484
+%global git_commit g9bd9178
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2014.2
-Release:        0.15.dev%{git_snaptag}.%{git_commit}%{?dist}
+Version:        2015.1
+Release:        0.1.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -141,6 +141,18 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Feb 23 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.1.dev1484.g9bd9178
+- Initial Kilo build
+- [Packstack] Allow command-line options with --gen-answer-file
+- [Nova] Generate random password for ironic
+- [Manila] Enable Manila in Packstack
+- [Packstack] Fix Printing messages
+- [Heat] Fix duplicate configure_delegated_roles in Heat
+- [AMQP] cherrypick ssl fixes from freeipa patches
+- [Packstack] Add Openstack unified client
+- [Packstack] Removing puppet-remote
+- [Packstack] Get rid of puppet-openstack dependency
+
 * Wed Feb 11 2015 Gael Chamoulaud <gchamoul@redhat.com> - 2014.2-0.15.dev1446
 - [AMQP] Remove QPID ssl package installation
 - [Packstack] Bulletproof novncproxy setting
