@@ -129,7 +129,6 @@ install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %files puppet
 %defattr(644,root,root,755)
 %{_datadir}/openstack-puppet/modules/packstack
-%{_datadir}/openstack-puppet/modules/remote
 
 %if 0%{?with_doc}
 %files doc
