@@ -107,7 +107,6 @@ rm -fr %{buildroot}%{python_sitelib}/tests
 # Install Puppet module
 mkdir -p %{buildroot}/%{_datadir}/openstack-puppet/modules
 cp -r %{_builddir}/puppet/modules/packstack  %{buildroot}/%{_datadir}/openstack-puppet/modules/
-cp -r %{_builddir}/puppet/modules/remote  %{buildroot}/%{_datadir}/openstack-puppet/modules/
 
 # Move Puppet manifest templates back to original place
 mkdir -p %{buildroot}/%{python_sitelib}/packstack/puppet
