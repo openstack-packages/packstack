@@ -1,0 +1,8 @@
+Verified+1: Derek Higgins <derekh@redhat.com>
+Code-Review+2: Gaël Chamoulaud <gchamoul@redhat.com>
+Verified+1: Gaël Chamoulaud <gchamoul@redhat.com>
+Submitted-by: Gaël Chamoulaud <gchamoul@redhat.com>
+Submitted-at: Mon, 02 Mar 2015 11:28:07 +0100
+Reviewed-on: https://review.gerrithub.io/217674
+Project: openstack-packages/packstack
+Branch: refs/heads/f20-master
