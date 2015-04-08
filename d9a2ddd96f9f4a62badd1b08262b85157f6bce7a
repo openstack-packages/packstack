@@ -1,0 +1,7 @@
+Verified+1: Alan Pevec <alan.pevec@redhat.com>
+Code-Review+2: Alan Pevec <alan.pevec@redhat.com>
+Submitted-by: Alan Pevec <alan.pevec@redhat.com>
+Submitted-at: Wed, 08 Apr 2015 18:49:52 +0200
+Reviewed-on: https://review.gerrithub.io/229713
+Project: openstack-packages/packstack
+Branch: refs/heads/f20-master
