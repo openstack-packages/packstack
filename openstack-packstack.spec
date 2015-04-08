@@ -108,6 +108,10 @@ rm -fr %{buildroot}%{python_sitelib}/tests
 mkdir -p %{buildroot}/%{_datadir}/openstack-puppet/modules
 cp -r %{_builddir}/puppet/modules/packstack  %{buildroot}/%{_datadir}/openstack-puppet/modules/
 
+# Move packstack documentation
+mkdir -p %{buildroot}/%{_datadir}/packstack
+install -p -D -m 644 docs/packstack.rst %{buildroot}/%{_datadir}/packstack
+
 # Move Puppet manifest templates back to original place
 mkdir -p %{buildroot}/%{python_sitelib}/packstack/puppet
 mv %{_builddir}/puppet/templates %{buildroot}/%{python_sitelib}/packstack/puppet/
@@ -117,12 +121,15 @@ mkdir -p %{buildroot}%{_mandir}/man1
 install -p -D -m 644 docs/_build/man/*.1 %{buildroot}%{_mandir}/man1/
 %endif
 
+# Remove docs directory
+rm -fr %{buildroot}%{python_sitelib}/docs
 
 # files ------------------------------------------------------------------------
 
 %files
 %doc LICENSE
 %{_bindir}/packstack
+%{_datadir}/packstack
 %{python_sitelib}/packstack
 %{python_sitelib}/packstack-*.egg-info
 
