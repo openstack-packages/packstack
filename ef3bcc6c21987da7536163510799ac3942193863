@@ -1,0 +1,8 @@
+Code-Review+2: Gaël Chamoulaud <gchamoul@redhat.com>
+Verified+1: Haïkel Guémar <haikel.guemar@gmail.com>
+Code-Review+2: Haïkel Guémar <haikel.guemar@gmail.com>
+Submitted-by: Gaël Chamoulaud <gchamoul@redhat.com>
+Submitted-at: Wed, 20 May 2015 20:11:41 +0200
+Reviewed-on: https://review.gerrithub.io/233843
+Project: openstack-packages/packstack
+Branch: refs/heads/rpm-master
