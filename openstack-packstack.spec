@@ -43,6 +43,8 @@ servers over ssh.
 Summary:        Packstack Puppet module
 Group:          Development/Libraries
 
+Requires:       rubygem-ipaddress
+
 %description puppet
 Puppet module used by Packstack to install OpenStack
 
