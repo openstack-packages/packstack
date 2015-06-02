@@ -8,7 +8,7 @@
 
 Name:           openstack-packstack
 Version:        2015.1
-Release:        0.2.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.3.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -18,6 +18,7 @@ URL:            https://github.com/stackforge/packstack
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
 
 Patch1:         0001-Fix-mongodb-configuration.patch
+Patch2:         0002-Do-not-enable-Keystone-in-httpd-by-default.patch
 
 BuildArch:      noarch
 
@@ -72,6 +73,7 @@ This package contains documentation files for Packstack.
 %prep
 %setup -q -n packstack-%{upstream_version}
 %patch1 -p1
+%patch2 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -150,6 +152,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Jun 02 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.3.dev1537.gba5183c
+- Do not enable Keystone in httpd by default
+
 * Tue May 19 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.2.dev1537.gba5183c
 - Fix mongodb configuration
 

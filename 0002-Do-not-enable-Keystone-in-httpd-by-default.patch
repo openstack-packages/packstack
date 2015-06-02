@@ -1,0 +1,35 @@
+From 2448e07fa6f7ed75330f795d9932034a7963b338 Mon Sep 17 00:00:00 2001
+From: Alan Pevec <alan.pevec@redhat.com>
+Date: Mon, 1 Jun 2015 15:45:34 +0200
+Subject: [PATCH] Do not enable Keystone in httpd by default
+
+This was an unexpected change of default on the stable branch,
+and Fedora selinux-policy does not support it:
+https://www.redhat.com/archives/rdo-list/2015-May/msg00337.html
+
+(EL7 works thanks to openstack-selinux package which does not exist in Fedora)
+
+This could be carried as Fedora-only RPM patch, if it is not acceptable
+for the upstream Juno branch.
+
+Change-Id: Ic69293b31fa4deeca1a4659cb1cf872692985a68
+---
+ packstack/plugins/keystone_100.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packstack/plugins/keystone_100.py b/packstack/plugins/keystone_100.py
+index 442b803..3824638 100644
+--- a/packstack/plugins/keystone_100.py
++++ b/packstack/plugins/keystone_100.py
+@@ -152,7 +152,7 @@ def initConfig(controller):
+              "PROMPT": "Enter the Keystone service name.",
+              "OPTION_LIST": ['keystone', 'httpd'],
+              "VALIDATORS": [validators.validate_options],
+-             "DEFAULT_VALUE": "httpd",
++             "DEFAULT_VALUE": "keystone",
+              "MASK_INPUT": False,
+              "LOOSE_VALIDATION": False,
+              "CONF_NAME": 'CONFIG_KEYSTONE_SERVICE_NAME',
+-- 
+1.9.3
+
