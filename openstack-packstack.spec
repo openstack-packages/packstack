@@ -8,7 +8,7 @@
 
 Name:           openstack-packstack
 Version:        2015.1
-Release:        0.3.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.4.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -19,6 +19,7 @@ Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{up
 
 Patch1:         0001-Fix-mongodb-configuration.patch
 Patch2:         0002-Do-not-enable-Keystone-in-httpd-by-default.patch
+Patch3:         0003-Add-ability-to-enable-rdo-testing-repo.patch
 
 BuildArch:      noarch
 
@@ -74,6 +75,7 @@ This package contains documentation files for Packstack.
 %setup -q -n packstack-%{upstream_version}
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -152,6 +154,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Jun 03 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.4.dev1537.gba5183c
+- Add ability to enable rdo testing repo - rhbz#1218750
+
 * Tue Jun 02 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.3.dev1537.gba5183c
 - Do not enable Keystone in httpd by default
 
