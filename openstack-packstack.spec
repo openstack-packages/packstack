@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1537
-%global git_commit gba5183c
+%global git_snaptag 1565
+%global git_commit gd1211af
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -8,7 +8,7 @@
 
 Name:           openstack-packstack
 Version:        2015.1
-Release:        0.4.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.5.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,9 +17,7 @@ URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
 
-Patch1:         0001-Fix-mongodb-configuration.patch
-Patch2:         0002-Do-not-enable-Keystone-in-httpd-by-default.patch
-Patch3:         0003-Add-ability-to-enable-rdo-testing-repo.patch
+Patch1:         0001-Do-not-enable-Keystone-in-httpd-by-default.patch
 
 BuildArch:      noarch
 
@@ -74,8 +72,6 @@ This package contains documentation files for Packstack.
 %prep
 %setup -q -n packstack-%{upstream_version}
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -154,6 +150,28 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Jun 09 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.5.dev1565.gd1211af
+- [Neutron] use correct iface addresses on tunnel firewall rules - rhbz#1215638
+- [Apache] don't purge apache configs in prescript
+- [Apache] Fix apache module issues
+- [Packstack] Updated LDAP doc entries
+- [Packstack] Base force_interface on ipaddr instead of ipaddress
+- [Packstack] Add symbolic link for latest log dir
+- [Heat] Add processor process_string_nofloat
+- [Nova] Fix Nova Networking with Manila Generic Driver
+- [Nova] Fix instance metadata when not installing neutron
+- [Swift] temporary use ipv6 address without brackets
+- [memcached] fix memory consumption and add temporary IPv6 hack
+- [Provision] re-enable provisioning subnets with ipv6
+- [Keystone] Unite keystone admin and public url configuration
+- [SSL] fix validate_writeable_directory
+- [KEYSTONE] Correctly switch all admin usernames to CONFIG_KEYSTONE_ADMIN_USERNAME
+- [Packstack] Refactor SSL setup to use CA to sign certificates
+- [Neutron] Correct value of $public_bridge_name
+- [Packstack] Add ability to enable rdo testing repo
+- [Neutron] Allow CIDR instead of iterface name
+- [Mongodb] Fix mongodb configuration
+
 * Wed Jun 03 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.4.dev1537.gba5183c
 - Add ability to enable rdo testing repo - rhbz#1218750
 
