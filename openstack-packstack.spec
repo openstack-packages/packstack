@@ -8,7 +8,7 @@
 
 Name:           openstack-packstack
 Version:        2015.1
-Release:        0.5.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.6.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -150,6 +150,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2015.1-0.6.dev1565.gd1211af
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Tue Jun 09 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.5.dev1565.gd1211af
 - [Neutron] use correct iface addresses on tunnel firewall rules - rhbz#1215638
 - [Apache] don't purge apache configs in prescript
