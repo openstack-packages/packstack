@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1565
-%global git_commit gd1211af
+%global git_snaptag 1577
+%global git_commit gc9f8c3c
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -8,7 +8,7 @@
 
 Name:           openstack-packstack
 Version:        2015.1
-Release:        0.6.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.7.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -150,6 +150,15 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Jun 22 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.7.dev1577.gc9f8c3c
+- [AMQP] ensure nssdb pw is set to undef if we don't use ssl - rhbz#1232648
+- [Nagios] Fix 'File mode must be a string, not "Fixnum"' error
+- [Cinder] set correct backup_swift_url - rhbz#1232198
+- [Packstack] Depend on package resource names
+- [Horizon] ensure horizon secret key stays same
+- [Nagios] rework packstack nagios puppet generation
+- [Neutron] Fix br-ext IP configuration
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2015.1-0.6.dev1565.gd1211af
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
