@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1577
-%global git_commit gc9f8c3c
+%global git_snaptag 1589
+%global git_commit g1d6372f
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -8,7 +8,7 @@
 
 Name:           openstack-packstack
 Version:        2015.1
-Release:        0.7.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.8.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -150,6 +150,14 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Tue Jun 30 2015 Gaël Chamoulaud <gchamoul@redhat.com> - 2015.1-0.8.dev1589.g1d6372f
+- [Keystone] Fix double slash in adminUrl - rhbz#1232343
+- [Manila] Make sure Manila always run after Glance
+- [Packstack] Spelling correction for typo in prescript_ooo.py
+- [Packstack] Fix answer file duplicate values
+- [Sahara] Fix sahara template for qpid
+- [Neutron] Fix linuxbridge and switch it to ml2 plugin
+
 * Mon Jun 22 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.7.dev1577.gc9f8c3c
 - [AMQP] ensure nssdb pw is set to undef if we don't use ssl - rhbz#1232648
 - [Nagios] Fix 'File mode must be a string, not "Fixnum"' error
