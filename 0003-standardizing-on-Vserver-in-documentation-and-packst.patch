@@ -1,0 +1,49 @@
+From 08d4ca09b47ea78f855af2f26d00aabd950dd64d Mon Sep 17 00:00:00 2001
+From: Jon Schlueter <jschluet@redhat.com>
+Date: Mon, 29 Jun 2015 11:47:46 -0400
+Subject: [PATCH] standardizing on Vserver in documentation and packstack
+ plugins
+
+s/vServer/Vserver/
+
+link from netapp's site has the naming "Vserver"
+
+https://library.netapp.com/ecmdocs/ECMP1196798/html/GUID-E643017F-041B-4ECC-BEA1-E4D80E26A47E.html
+
+so standardizing on that case through out the code and documentation
+
+Change-Id: Iccddf4a731dc9b5a26cd2816f149062e3c93f997
+---
+ docs/packstack.rst              | 2 +-
+ packstack/plugins/cinder_250.py | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/docs/packstack.rst b/docs/packstack.rst
+index b312413..bc3c21e 100644
+--- a/docs/packstack.rst
++++ b/docs/packstack.rst
+@@ -556,7 +556,7 @@ Cinder NetApp 7-mode FC configuration
+ **CONFIG_CINDER_NETAPP_PARTNER_BACKEND_NAME**
+     The name of the config.conf stanza for a Data ONTAP (7-mode) HA partner.  This option is only used by the driver when connecting to an instance with a storage family of Data ONTAP operating in 7-Mode, and it is required if the storage protocol selected is FC. Defaults to: ''.
+ 
+-Cinder NetApp vServer configuration
++Cinder NetApp Vserver configuration
+ -----------------------------------
+ 
+ **CONFIG_CINDER_NETAPP_VSERVER**
+diff --git a/packstack/plugins/cinder_250.py b/packstack/plugins/cinder_250.py
+index a860f01..d28d1f1 100644
+--- a/packstack/plugins/cinder_250.py
++++ b/packstack/plugins/cinder_250.py
+@@ -505,7 +505,7 @@ def initConfig(controller):
+          "POST_CONDITION_MATCH": True},
+ 
+         {"GROUP_NAME": "CINDERNETAPPVSERVER",
+-         "DESCRIPTION": "Cinder NetApp vServer configuration",
++         "DESCRIPTION": "Cinder NetApp Vserver configuration",
+          "PRE_CONDITION": check_netapp_vserver_options,
+          "PRE_CONDITION_MATCH": True,
+          "POST_CONDITION": False,
+-- 
+2.4.3
+

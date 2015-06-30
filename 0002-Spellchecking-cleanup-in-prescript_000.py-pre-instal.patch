@@ -1,0 +1,26 @@
+From 0215c26f7332dc22a3cf195c8795481026d57a9b Mon Sep 17 00:00:00 2001
+From: Jon Schlueter <jschluet@redhat.com>
+Date: Thu, 25 Jun 2015 20:31:22 -0400
+Subject: [PATCH] Spellchecking cleanup in prescript_000.py "pre installing"
+
+Change-Id: I01027e1e5796b8f66158c76503b072fe4eb20e81
+---
+ packstack/plugins/prescript_000.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packstack/plugins/prescript_000.py b/packstack/plugins/prescript_000.py
+index ee4aa38..e396a15 100644
+--- a/packstack/plugins/prescript_000.py
++++ b/packstack/plugins/prescript_000.py
+@@ -882,7 +882,7 @@ def initSequences(controller):
+          'functions': [install_keys]},
+         {'title': 'Preparing servers',
+          'functions': [server_prep]},
+-        {'title': 'Preinstalling Puppet and discovering hosts\' details',
++        {'title': 'Pre installing Puppet and discovering hosts\' details',
+          'functions': [preinstall_and_discover]},
+         {'title': 'Adding pre install manifest entries',
+          'functions': [create_manifest]},
+-- 
+2.4.3
+

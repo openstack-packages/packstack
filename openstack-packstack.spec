@@ -18,6 +18,9 @@ URL:            https://github.com/stackforge/packstack
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
 
 Patch1:         0001-Do-not-enable-Keystone-in-httpd-by-default.patch
+Patch2:         0002-Spellchecking-cleanup-in-prescript_000.py-pre-instal.patch
+Patch3:         0003-standardizing-on-Vserver-in-documentation-and-packst.patch
+Patch4:         0004-Spellchecking-cleanup.patch
 
 BuildArch:      noarch
 
@@ -72,6 +75,9 @@ This package contains documentation files for Packstack.
 %prep
 %setup -q -n packstack-%{upstream_version}
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -157,6 +163,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 - [Packstack] Fix answer file duplicate values
 - [Sahara] Fix sahara template for qpid
 - [Neutron] Fix linuxbridge and switch it to ml2 plugin
+- Add 0002-Spellchecking-cleanup-in-prescript_000.py-pre-instal.patch
+- Add 0003-standardizing-on-Vserver-in-documentation-and-packst.patch
+- Add 0004-Spellchecking-cleanup.patch
 
 * Mon Jun 22 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.7.dev1577.gc9f8c3c
 - [AMQP] ensure nssdb pw is set to undef if we don't use ssl - rhbz#1232648

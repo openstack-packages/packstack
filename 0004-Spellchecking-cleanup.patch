@@ -1,0 +1,73 @@
+From c82368f4ad794df007615596d45137eec0e2b159 Mon Sep 17 00:00:00 2001
+From: Jon Schlueter <jschluet@redhat.com>
+Date: Mon, 29 Jun 2015 11:44:49 -0400
+Subject: [PATCH] Spellchecking cleanup
+
+s/Openstack/OpenStack/
+s/CA cahin/CA chain/
+s/necesary/necessary/
+s/undeterministic behavior/nondeterministic behavior/
+
+Change-Id: I25b61fde65743913b51b562d1558654c6fdcd728
+---
+ docs/packstack.rst                  | 2 +-
+ packstack/plugins/dashboard_500.py  | 2 +-
+ packstack/plugins/nova_300.py       | 2 +-
+ packstack/plugins/postscript_948.py | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/docs/packstack.rst b/docs/packstack.rst
+index b312413..fd53a06 100644
+--- a/docs/packstack.rst
++++ b/docs/packstack.rst
+@@ -106,7 +106,7 @@ Global Options
+ 
+ SSL setup
+ ---------
+-Packstack supports ability to be get CA certificate and use it to sign all certificates used in Openstack deployment. Standard workflow for this would be creating Subordinate CA. If Root CA is given to Packstack it is not safe to use it for anything else. If no CA is provided and CONFIG_SSL_CACERT_SELFSIGN is set to 'y' Packstack will use Selfsigned CA.
++Packstack supports ability to be get CA certificate and use it to sign all certificates used in OpenStack deployment. Standard workflow for this would be creating Subordinate CA. If Root CA is given to Packstack it is not safe to use it for anything else. If no CA is provided and CONFIG_SSL_CACERT_SELFSIGN is set to 'y' Packstack will use Selfsigned CA.
+ 
+ **CONFIG_SSL_CERT_DIR**
+     Enter the path to use to store generated SSL certificates in.
+diff --git a/packstack/plugins/dashboard_500.py b/packstack/plugins/dashboard_500.py
+index b29c26f..fb43d59 100644
+--- a/packstack/plugins/dashboard_500.py
++++ b/packstack/plugins/dashboard_500.py
+@@ -103,7 +103,7 @@ def initConfig(controller):
+          "DEPRECATES": ['CONFIG_SSL_KEY']},
+ 
+         {"CMD_OPTION": "os-ssl-cachain",
+-         "PROMPT": ("Enter the CA cahin file corresponding to the certificate "
++         "PROMPT": ("Enter the CA chain file corresponding to the certificate "
+                     "if one was entered"),
+          "OPTION_LIST": [],
+          "VALIDATORS": [],
+diff --git a/packstack/plugins/nova_300.py b/packstack/plugins/nova_300.py
+index cdcb8d6..2d860a6 100644
+--- a/packstack/plugins/nova_300.py
++++ b/packstack/plugins/nova_300.py
+@@ -431,7 +431,7 @@ def gather_host_keys(config, messages):
+ 
+ 
+ def create_api_manifest(config, messages):
+-    # Since this step is running first, let's create necesary variables here
++    # Since this step is running first, let's create necessary variables here
+     # and make them global
+     global compute_hosts, network_hosts
+     com_var = config.get("CONFIG_COMPUTE_HOSTS", "")
+diff --git a/packstack/plugins/postscript_948.py b/packstack/plugins/postscript_948.py
+index 09a32a6..207ca50 100644
+--- a/packstack/plugins/postscript_948.py
++++ b/packstack/plugins/postscript_948.py
+@@ -55,7 +55,7 @@ def create_manifest(config, messages):
+         manifestdata = getManifestTemplate("postscript")
+         appendManifestFile(manifestfile, manifestdata, 'postscript')
+         # TO-DO: remove this temporary fix for nova-network/neutron
+-        #        undeterministic behavior
++        #        nondeterministic behavior
+         provision = (
+             config.get("CONFIG_PROVISION_ALL_IN_ONE_OVS_BRIDGE") not in
+             set(['false', 'n', None])
+-- 
+2.4.3
+
