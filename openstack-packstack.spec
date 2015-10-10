@@ -1,14 +1,14 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1589
-%global git_commit g1d6372f
+%global git_snaptag 1654
+%global git_commit gcbbf46e
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2015.1
-Release:        0.8.dev%{git_snaptag}.%{git_commit}%{?dist}
+Version:        2015.2
+Release:        0.1.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -16,11 +16,6 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
-
-Patch1:         0001-Do-not-enable-Keystone-in-httpd-by-default.patch
-Patch2:         0002-Spellchecking-cleanup-in-prescript_000.py-pre-instal.patch
-Patch3:         0003-standardizing-on-Vserver-in-documentation-and-packst.patch
-Patch4:         0004-Spellchecking-cleanup.patch
 
 BuildArch:      noarch
 
@@ -35,6 +30,7 @@ Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
 Requires:       PyYAML
 Requires:       python-docutils
+Requires:       pyOpenSSL
 
 %description
 Packstack is a utility that uses Puppet modules to install OpenStack. Packstack
@@ -74,10 +70,6 @@ This package contains documentation files for Packstack.
 
 %prep
 %setup -q -n packstack-%{upstream_version}
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -156,62 +148,5 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Tue Jun 30 2015 Gaël Chamoulaud <gchamoul@redhat.com> - 2015.1-0.8.dev1589.g1d6372f
-- [Keystone] Fix double slash in adminUrl - rhbz#1232343
-- [Manila] Make sure Manila always run after Glance
-- [Packstack] Spelling correction for typo in prescript_ooo.py
-- [Packstack] Fix answer file duplicate values
-- [Sahara] Fix sahara template for qpid
-- [Neutron] Fix linuxbridge and switch it to ml2 plugin
-- Add 0002-Spellchecking-cleanup-in-prescript_000.py-pre-instal.patch
-- Add 0003-standardizing-on-Vserver-in-documentation-and-packst.patch
-- Add 0004-Spellchecking-cleanup.patch
-
-* Mon Jun 22 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.7.dev1577.gc9f8c3c
-- [AMQP] ensure nssdb pw is set to undef if we don't use ssl - rhbz#1232648
-- [Nagios] Fix 'File mode must be a string, not "Fixnum"' error
-- [Cinder] set correct backup_swift_url - rhbz#1232198
-- [Packstack] Depend on package resource names
-- [Horizon] ensure horizon secret key stays same
-- [Nagios] rework packstack nagios puppet generation
-- [Neutron] Fix br-ext IP configuration
-
-* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2015.1-0.6.dev1565.gd1211af
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
-
-* Tue Jun 09 2015 Iván Chavero <ichavero@redhat.com> - 2015.1-0.5.dev1565.gd1211af
-- [Neutron] use correct iface addresses on tunnel firewall rules - rhbz#1215638
-- [Apache] don't purge apache configs in prescript
-- [Apache] Fix apache module issues
-- [Packstack] Updated LDAP doc entries
-- [Packstack] Base force_interface on ipaddr instead of ipaddress
-- [Packstack] Add symbolic link for latest log dir
-- [Heat] Add processor process_string_nofloat
-- [Nova] Fix Nova Networking with Manila Generic Driver
-- [Nova] Fix instance metadata when not installing neutron
-- [Swift] temporary use ipv6 address without brackets
-- [memcached] fix memory consumption and add temporary IPv6 hack
-- [Provision] re-enable provisioning subnets with ipv6
-- [Keystone] Unite keystone admin and public url configuration
-- [SSL] fix validate_writeable_directory
-- [KEYSTONE] Correctly switch all admin usernames to CONFIG_KEYSTONE_ADMIN_USERNAME
-- [Packstack] Refactor SSL setup to use CA to sign certificates
-- [Neutron] Correct value of $public_bridge_name
-- [Packstack] Add ability to enable rdo testing repo
-- [Neutron] Allow CIDR instead of iterface name
-- [Mongodb] Fix mongodb configuration
-
-* Wed Jun 03 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.4.dev1537.gba5183c
-- Add ability to enable rdo testing repo - rhbz#1218750
-
-* Tue Jun 02 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.3.dev1537.gba5183c
-- Do not enable Keystone in httpd by default
-
-* Tue May 19 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.2.dev1537.gba5183c
-- Fix mongodb configuration
-
-* Sat May 02 2015 Alan Pevec <apevec@redhat.com> - 2015.1-0.1.dev1537.gba5183c
-- Kilo release
-
-* Mon Feb 23 2015 Martin Mágr <mmagr@redhat.com> - 2015.1-0.1.dev1484.g9bd9178
-- Initial Kilo build
+* Sat Oct 10 2015  Alan Pevec <apevec@redhat.com> - 2015.2-0.1.dev.dev1654.gcbbf46e
+-  Liberty release candidate
