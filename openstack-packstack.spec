@@ -7,8 +7,9 @@
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
+Epoch:          1
 Version:        7.0.0
-Release:        0.2.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.3.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -148,7 +149,7 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
-* Mon Oct 26 2015  Martin Mágr <mmagr@redhat.com> - 7.0.0.dev1661.gaf13b7e
+* Mon Oct 26 2015  Martin Mágr <mmagr@redhat.com> - 7.0.0-0.3.dev1661.gaf13b7e
 -  Liberty rebase
 
 * Sat Oct 10 2015  Alan Pevec <apevec@redhat.com> - 2015.2-0.1.dev.dev1654.gcbbf46e
