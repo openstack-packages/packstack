@@ -1,14 +1,14 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1654
-%global git_commit gcbbf46e
+%global git_snaptag 1661
+%global git_commit gaf13b7e
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2015.2
-Release:        0.1.dev%{git_snaptag}.%{git_commit}%{?dist}
+Version:        7.0.0
+Release:        0.2.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -148,5 +148,8 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Mon Oct 26 2015  Martin Mágr <mmagr@redhat.com> - 7.0.0.dev1661.gaf13b7e
+-  Liberty rebase
+
 * Sat Oct 10 2015  Alan Pevec <apevec@redhat.com> - 2015.2-0.1.dev.dev1654.gcbbf46e
 -  Liberty release candidate
