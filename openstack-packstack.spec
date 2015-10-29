@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.3.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.4.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -25,7 +25,7 @@ BuildRequires:  python-setuptools
 
 Requires:       openssh-clients
 Requires:       python-netaddr
-Requires:       openstack-packstack-puppet == %{version}-%{release}
+Requires:       openstack-packstack-puppet == %{epoch}:%{version}-%{release}
 Requires:       openstack-puppet-modules >= 2014.2.10
 Obsoletes:      packstack-modules-puppet
 Requires:       python-setuptools
@@ -149,6 +149,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Oct 29 2015  Javier Peña <jpena@redhat.com> - 7.0.0-0.4.dev1661.gaf13b7e
+- Use epoch in dependency for openstack-packstack-puppet
+
 * Mon Oct 26 2015  Martin Mágr <mmagr@redhat.com> - 7.0.0-0.3.dev1661.gaf13b7e
 -  Liberty rebase
 
