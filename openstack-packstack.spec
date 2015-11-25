@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.5.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.6.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -18,6 +18,7 @@ URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
 Patch0:         0001-Add-symlink-to-support-hiera-3.0.patch
+Patch1:         0002-Do-not-enable-EPEL-when-installing-RDO.patch
 
 BuildArch:      noarch
 
@@ -73,6 +74,7 @@ This package contains documentation files for Packstack.
 %prep
 %setup -q -n packstack-%{upstream_version}
 %patch0 -p1
+%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -151,6 +153,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Nov 25 2015 Javier Peña <jpena@redhat.com> - 7.0.0-0.6.dev.dev1661.gaf13b7e
+- Do not enable EPEL when installing RDO
+
 * Wed Nov 25 2015 Alan Pevec <apevec@redhat.com> - 7.0.0-0.5.dev.dev1661.gaf13b7e
 - Add symlink to support hiera >= 3.0 rhbz#1284978
 

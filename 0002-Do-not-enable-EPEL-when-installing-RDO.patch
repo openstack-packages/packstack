@@ -1,0 +1,31 @@
+From 9a32e23e6878af3282517ad3891d238a0b26d039 Mon Sep 17 00:00:00 2001
+From: Javier Pena <jpena@redhat.com>
+Date: Wed, 25 Nov 2015 15:26:46 +0100
+Subject: [PATCH] Do not enable EPEL when installing RDO
+
+In previous releases, RDO required EPEL for some dependency
+packages. This is not the case anymore, so we don't need to force
+EPEL enablement when RDO is detected.
+
+Change-Id: I469829471a23a1a986c1514cbc17739a8362e0e9
+---
+ packstack/plugins/prescript_000.py | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/packstack/plugins/prescript_000.py b/packstack/plugins/prescript_000.py
+index a4df1a8..94cbd20 100644
+--- a/packstack/plugins/prescript_000.py
++++ b/packstack/plugins/prescript_000.py
+@@ -1092,9 +1092,6 @@ def manage_rdo(host, config):
+     except exceptions.ExecuteRuntimeError:
+         # RDO repo is not installed, so we don't need to continue
+         return
+-    # We are installing RDO. EPEL is a requirement, so enable it, overriding
+-    # any configured option
+-    config['CONFIG_USE_EPEL'] = 'y'
+ 
+     match = re.match(r'^(?P<version>\w+)\-(?P<release>\d+\.[\d\w]+)\n', out)
+     version, release = match.group('version'), match.group('release')
+-- 
+2.4.3
+
