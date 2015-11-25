@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.6.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.7.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -60,6 +60,9 @@ Group:            Documentation
 
 %if 0%{?rhel} == 6
 BuildRequires:  python-sphinx10
+%endif
+%if  0%{?fedora} >= 24
+BuildRequires:  python3-sphinx
 %else
 BuildRequires:  python-sphinx
 %endif
@@ -153,6 +156,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Wed Nov 25 2015 Javier Peña <jpena@redhat.com> - 7.0.0-0.7.dev.dev1661.gaf13b7e
+- Adapt man build to updated sphinx package, by using python3-sphinx
+
 * Wed Nov 25 2015 Javier Peña <jpena@redhat.com> - 7.0.0-0.6.dev.dev1661.gaf13b7e
 - Do not enable EPEL when installing RDO
 
