@@ -154,10 +154,10 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 * Wed Nov 25 2015 Alan Pevec <apevec@redhat.com> - 7.0.0-0.5.dev.dev1661.gaf13b7e
 - Add symlink to support hiera >= 3.0 rhbz#1284978
 
-* Thu Oct 29 2015  Javier Peña <jpena@redhat.com> - 7.0.0-0.4.dev1661.gaf13b7e
+* Thu Oct 29 2015  Javier Pena <jpena@redhat.com> - 7.0.0-0.4.dev1661.gaf13b7e
 - Use epoch in dependency for openstack-packstack-puppet
 
-* Mon Oct 26 2015  Martin Mágr <mmagr@redhat.com> - 7.0.0-0.3.dev1661.gaf13b7e
+* Mon Oct 26 2015  Martin Magr <mmagr@redhat.com> - 7.0.0-0.3.dev1661.gaf13b7e
 -  Liberty rebase
 
 * Sat Oct 10 2015  Alan Pevec <apevec@redhat.com> - 2015.2-0.1.dev.dev1654.gcbbf46e
