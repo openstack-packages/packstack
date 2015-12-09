@@ -17,6 +17,8 @@ URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
 
+Patch0001:      0001-WIP-remove-Ceilometer-alarming-configuration.patch
+
 BuildArch:      noarch
 
 BuildRequires:  python2-devel
@@ -70,6 +72,8 @@ This package contains documentation files for Packstack.
 
 %prep
 %setup -n packstack-%{upstream_version}
+
+%patch0001 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +

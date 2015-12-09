@@ -1,0 +1,34 @@
+From 89353b1d3b6e64cc0458b0d77ae6115b39a7f2eb Mon Sep 17 00:00:00 2001
+From: Javier Pena <jpena@redhat.com>
+Date: Wed, 9 Dec 2015 16:18:50 +0100
+Subject: [PATCH] WIP: remove Ceilometer alarming configuration
+
+This is a WIP patch, while Aodh support is merged
+(https://review.openstack.org/251988), to remove Ceilometer alarm
+configuration. Do not merge for now.
+
+Change-Id: I54012f18471bd812bfe874b68639908de1d73d9e
+---
+ packstack/puppet/templates/ceilometer.pp | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/packstack/puppet/templates/ceilometer.pp b/packstack/puppet/templates/ceilometer.pp
+index c5b8d76..1c92c3c 100644
+--- a/packstack/puppet/templates/ceilometer.pp
++++ b/packstack/puppet/templates/ceilometer.pp
+@@ -44,12 +44,6 @@ class { '::ceilometer::agent::central':
+   coordination_url => $coordination_url,
+ }
+ 
+-class { '::ceilometer::alarm::notifier':}
+-
+-class { '::ceilometer::alarm::evaluator':
+-  coordination_url => $coordination_url,
+-}
+-
+ $bind_host = hiera('CONFIG_IP_VERSION') ? {
+   'ipv6'  => '::0',
+   default => '0.0.0.0',
+-- 
+1.8.3.1
+
