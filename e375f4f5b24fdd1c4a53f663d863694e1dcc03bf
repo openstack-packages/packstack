@@ -1,0 +1,7 @@
+Verified+1: rdo-ci-jenkins <whayutin+rdocijenkins@redhat.com>
+Code-Review+2: Alan Pevec <alan.pevec@redhat.com>
+Submitted-by: Alan Pevec <alan.pevec@redhat.com>
+Submitted-at: Wed, 09 Dec 2015 18:04:34 +0100
+Reviewed-on: https://review.gerrithub.io/254640
+Project: openstack-packages/packstack
+Branch: refs/heads/rpm-master
