@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1661
-%global git_commit gaf13b7e
+%global git_snaptag 1680
+%global git_commit gd8a98dd
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.8.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.9.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -17,8 +17,6 @@ License:        ASL 2.0 and GPLv2
 URL:            https://github.com/stackforge/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
-Patch0:         0001-Add-symlink-to-support-hiera-3.0.patch
-Patch1:         0002-Do-not-enable-EPEL-when-installing-RDO.patch
 
 BuildArch:      noarch
 
@@ -72,8 +70,6 @@ This package contains documentation files for Packstack.
 
 %prep
 %setup -q -n packstack-%{upstream_version}
-%patch0 -p1
-%patch1 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -152,6 +148,14 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Dec 10 2015 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.9.dev.dev1680.gd8a98dd
+- Remove 0001-Add-symlink-to-support-hiera-3.0.patch
+- Remove 0002-Do-not-enable-EPEL-when-installing-RDO.patch
+- Dashboard's local_settings file should not be world readable (rhbz#1217089)
+- Add support for Neutron ML2 SR-IOV mechanism driver (rhbz#1167099)
+- Do not enable EPEL when installing RDO
+- Add symlink to support hiera >= 3.0 (rhbz#1284978)
+
 * Thu Nov 26 2015 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 1:7.0.0-0.8.dev.dev1661.gaf13b7e
 - Require sphinx-build directly instead of a package name
 
