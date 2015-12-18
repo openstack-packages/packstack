@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1680
-%global git_commit gd8a98dd
+%global git_snaptag 1682
+%global git_commit g42b3426
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.9.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.10.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -148,6 +148,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Dec 18 2015 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.10.dev.dev1682.g42b3426
+- Add Adapt to newest puppet-keystone (rhbz#1292923)
+
 * Thu Dec 10 2015 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.9.dev.dev1680.gd8a98dd
 - Remove 0001-Add-symlink-to-support-hiera-3.0.patch
 - Remove 0002-Do-not-enable-EPEL-when-installing-RDO.patch
