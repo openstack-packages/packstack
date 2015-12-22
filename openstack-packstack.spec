@@ -13,7 +13,7 @@ Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
-URL:            https://github.com/stackforge/packstack
+URL:            https://github.com/openstack/packstack
 # Tarball is created by bin/release.sh
 Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
 
