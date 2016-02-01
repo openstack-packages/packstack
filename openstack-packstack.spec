@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1682
-%global git_commit g42b3426
+%global git_snaptag 1692
+%global git_commit g1b5e83b
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.10.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.11.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -32,6 +32,10 @@ Requires:       python-setuptools
 Requires:       PyYAML
 Requires:       python-docutils
 Requires:       pyOpenSSL
+Requires:       iproute
+Requires:       libselinux-utils
+Requires:       initscripts
+
 
 %description
 Packstack is a utility that uses Puppet modules to install OpenStack. Packstack
@@ -148,6 +152,13 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Sun Jan 31 2016 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.11.dev1692.g1b5e83b
+- Add package dependencies (rhbz#1285502)
+- Install service_plugins packages on neutron api node (rhbz#1301680)
+- Remove nova-network workarounds (rhbz#1298964)
+- Fix lvm.conf edition (rhbz#1297712)
+- Switch to PyMySQL (rhbz#1266028)
+
 * Fri Dec 18 2015 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.10.dev.dev1682.g42b3426
 - Add Adapt to newest puppet-keystone (rhbz#1292923)
 
@@ -179,3 +190,4 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 
 * Sat Oct 10 2015  Alan Pevec <apevec@redhat.com> - 2015.2-0.1.dev.dev1654.gcbbf46e
 -  Liberty release candidate
+
