@@ -1,6 +1,6 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1692
-%global git_commit g1b5e83b
+%global git_snaptag 1699
+%global git_commit g8f54936
 
 %{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
@@ -9,7 +9,7 @@
 Name:           openstack-packstack
 Epoch:          1
 Version:        7.0.0
-Release:        0.11.dev%{git_snaptag}.%{git_commit}%{?dist}
+Release:        0.12.dev%{git_snaptag}.%{git_commit}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -152,6 +152,13 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Feb 18 2016 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.12.dev1699.g8f54936
+- Enable VPN tab in Horizon when enabling VPNaaS (rhbz#1297733)
+- Fix Trove api-paste.ini path
+- Use absolute path for Trove's api-paste.ini (rhbz#1282928)
+- Add notification driver (rhbz#1283261)
+- Drop dependancy on puppet-galera (rhbz#1283261)
+
 * Sun Jan 31 2016 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.11.dev1692.g1b5e83b
 - Add package dependencies (rhbz#1285502)
 - Install service_plugins packages on neutron api node (rhbz#1301680)
