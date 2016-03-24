@@ -1,14 +1,13 @@
+%define milestone .0rc1
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1484
-%global git_commit g9bd9178
-%{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
+%{!?upstream_version:   %global upstream_version         %{version}%{milestone}}
 
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
-Version:        2015.1
-Release:        0.1.dev%{git_snaptag}.%{git_commit}%{?dist}
+Version:        8.0.0
+Release:        0.1%{milestone}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -148,3 +147,5 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Thu Mar 24 2016 RDO <rdo-list@redhat.com> 8.0.0-0.1.0rc1
+- RC1 Rebuild for Mitaka rc1
