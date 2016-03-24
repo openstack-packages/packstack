@@ -1,22 +1,18 @@
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
-%global git_snaptag 1699
-%global git_commit g8f54936
-
-%{!?upstream_version:   %global upstream_version         %{version}.dev%{git_snaptag}.%{git_commit}}
 
 # openstack-packstack ----------------------------------------------------------
 
 Name:           openstack-packstack
 Epoch:          1
-Version:        7.0.0
-Release:        0.12.dev%{git_snaptag}.%{git_commit}%{?dist}
+Version:        7.0.1
+Release:        0.13.dev%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
-URL:            https://github.com/stackforge/packstack
-# Tarball is created by bin/release.sh
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
+URL:            https://github.com/openstack/packstack
+# Tarball is created by openstack-infra jenkins jobs
+Source0:        http://tarballs.openstack.org/packstack/packstack-%{version}.tar.gz
 
 BuildArch:      noarch
 
@@ -73,7 +69,7 @@ This package contains documentation files for Packstack.
 # prep -------------------------------------------------------------------------
 
 %prep
-%setup -q -n packstack-%{upstream_version}
+%setup -q -n packstack-%{version}
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -152,6 +148,14 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+
+* Thu Mar 24 2016 Iván Chavero <ichavero@redhat.com> - 7.0.1-0.13
+- Use correct endpoint name (rhbz#1306547)
+- Remove S3 endpoint (rhbz#1317110)
+- Set manila nova_flavor id (rhbz#1304104)
+- Change URL to the openstack github organization
+- Change Source0 to the openstack tarballs server
+
 * Thu Feb 18 2016 Iván Chavero <ichavero@redhat.com> - 7.0.0-0.12.dev1699.g8f54936
 - Enable VPN tab in Horizon when enabling VPNaaS (rhbz#1297733)
 - Fix Trove api-paste.ini path
