@@ -1,4 +1,4 @@
-%define milestone .0rc1
+%define milestone .0rc2
 %global with_doc %{!?_without_doc:1}%{?_without_doc:0}
 %{!?upstream_version:   %global upstream_version         %{version}%{milestone}}
 
@@ -7,20 +7,20 @@
 
 Name:           openstack-packstack
 Version:        8.0.0
-Release:        0.4%{milestone}%{?dist}
+Release:        0.7%{milestone}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
 License:        ASL 2.0 and GPLv2
 URL:            https://github.com/openstack/packstack
-# Tarball is created by bin/release.sh
-Source0:        http://mmagr.fedorapeople.org/downloads/packstack/packstack-%{upstream_version}.tar.gz
+Source0:        http://tarballs.openstack.org/packstack/packstack-%{upstream_version}.tar.gz
 
-# https://review.openstack.org/#/q/I25de6e65228257fd39df0d9ad59a56e331f16393,n,z
-Patch0001:      0001-Support-new-mariadb-server-galera-package.patch
-# https://review.openstack.org/#/q/I9b136853101dbbaba5cedcaadb7645f0ed2f65d8,n,z
-Patch0002:      0002-Trove-use-default-api-paste.ini-location.patch
-
+#
+# patches_base=8.0.0.0rc2
+#
+Patch0001: 0001-Packstack-should-not-specify-release-when-installint.patch
+Patch0002: 0002-Ensure-aodh-and-horizon-templates-do-not-overwrite-p.patch
+Patch0003: 0003-Workaround-for-dev-kvm-permissions-issues.patch
 
 BuildArch:      noarch
 
@@ -75,8 +75,10 @@ This package contains documentation files for Packstack.
 
 %prep
 %setup -n packstack-%{upstream_version}
+
 %patch0001 -p1
 %patch0002 -p1
+%patch0003 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -155,6 +157,12 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Apr 08 2016 Alan Pevec <apevec AT redhat.com> 8.0.0-0.7.0rc2
+- Update to 8.0.0.0rc2
+- Ensure aodh and horizon templates do not overwrite ports.conf
+- Workaround for /dev/kvm permissions issues
+- Packstack should not specify release when installint rdo repo
+
 * Mon Apr 04 2016 Alan Pevec <apevec AT redhat.com> 8.0.0-0.4.0rc1
 - Trove: use default api-paste.ini location
 
