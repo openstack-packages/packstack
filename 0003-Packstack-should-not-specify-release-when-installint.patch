@@ -1,4 +1,4 @@
-From 232f2cfbdd7eb55483b95e8ab5667b374d1e8349 Mon Sep 17 00:00:00 2001
+From 3281ff68b723b5d669374f78f45ffc3878b8ca5f Mon Sep 17 00:00:00 2001
 From: Alfredo Moralejo <amoralej@redhat.com>
 Date: Wed, 6 Apr 2016 20:29:25 +0200
 Subject: [PATCH] Packstack should not specify release when installint rdo repo

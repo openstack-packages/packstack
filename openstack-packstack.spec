@@ -7,7 +7,7 @@
 
 Name:           openstack-packstack
 Version:        8.0.0
-Release:        0.7%{milestone}%{?dist}
+Release:        0.8%{milestone}%{?dist}
 Summary:        Openstack Install Utility
 
 Group:          Applications/System
@@ -18,9 +18,10 @@ Source0:        http://tarballs.openstack.org/packstack/packstack-%{upstream_ver
 #
 # patches_base=8.0.0.0rc2
 #
-Patch0001: 0001-Packstack-should-not-specify-release-when-installint.patch
-Patch0002: 0002-Ensure-aodh-and-horizon-templates-do-not-overwrite-p.patch
-Patch0003: 0003-Workaround-for-dev-kvm-permissions-issues.patch
+Patch0001: 0001-Fix-gate-Tempest-setup-and-repositories.patch
+Patch0002: 0002-Workaround-for-dev-kvm-permissions-issues.patch
+Patch0003: 0003-Packstack-should-not-specify-release-when-installint.patch
+Patch0004: 0004-Ensure-aodh-and-horizon-templates-do-not-overwrite-p.patch
 
 BuildArch:      noarch
 
@@ -79,6 +80,7 @@ This package contains documentation files for Packstack.
 %patch0001 -p1
 %patch0002 -p1
 %patch0003 -p1
+%patch0004 -p1
 
 # Sanitizing a lot of the files in the puppet modules
 find packstack/puppet/modules \( -name .fixtures.yml -o -name .gemfile -o -name ".travis.yml" -o -name .rspec \) -exec rm {} +
@@ -157,6 +159,9 @@ rm -fr %{buildroot}%{python_sitelib}/docs
 # changelog --------------------------------------------------------------------
 
 %changelog
+* Fri Apr 15 2016 Alan Pevec <apevec AT redhat.com> 8.0.0-0.8.0rc2
+- Fix gate: Tempest setup and repositories
+
 * Fri Apr 08 2016 Alan Pevec <apevec AT redhat.com> 8.0.0-0.7.0rc2
 - Update to 8.0.0.0rc2
 - Ensure aodh and horizon templates do not overwrite ports.conf

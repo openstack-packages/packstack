@@ -1,4 +1,4 @@
-From 98b36c1403860bd70b138aa79ed2317e9b0df223 Mon Sep 17 00:00:00 2001
+From 23ed7ca13938bd2aca2417077b35c0c2c30473cf Mon Sep 17 00:00:00 2001
 From: Alan Pevec <alan.pevec@redhat.com>
 Date: Fri, 8 Apr 2016 14:59:43 +0200
 Subject: [PATCH] Workaround for /dev/kvm permissions issues
